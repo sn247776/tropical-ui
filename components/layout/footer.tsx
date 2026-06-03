@@ -7,14 +7,14 @@ import { basicInfo } from "@/stores/basic-info";
 
 export default function Footer() {
   return (
-    <footer className="bg-[#cbded358] text-black md:pt-sections pt-middel">
+    <footer className="bg-primary/5 text-black md:pt-sections pt-middel">
       <div className="container mx-auto grid sm:grid-cols-[repeat(2,250px)] xl:grid-cols-[repeat(4,250px)] justify-between md:gap-sections gap-items">
 
         {/* About Section */}
         <div>
           <h2 className="text-primary text-2xl font-semibold">About</h2>
           <p className="my-middel">
-            {basicInfo?.name} is a comprehensive real estate management platform based in Gurugram, offering tech driven solutions for leasing, selling, and managing properties from possession to post-sale.
+            {basicInfo?.name} is a comprehensive real estate management platform based in Thiland, offering tech driven solutions for leasing, selling, and managing properties from possession to post-sale.
           </p>
 
           <div className="flex gap-items">

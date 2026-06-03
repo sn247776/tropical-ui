@@ -41,12 +41,12 @@ const Navbar = () => {
         {/* Buttons */}
         <div className="flex items-center space-x-4">
           <Link href={'/visits'}>
-                    <Button variant="outline" size="sm" >
+                    <Button variant="outline" >
             <Calendar />
             Visits
           </Button>
           </Link>
-          <Button size="sm" asChild className="hidden lg:flex">
+          <Button  asChild className="hidden lg:flex">
             <Link href="/spaces">Browse Spaces</Link>
           </Button>
           <MobNav/>
