@@ -8,7 +8,7 @@ import { basicInfo } from "@/stores/basic-info";
 export default function Footer() {
   return (
     <footer className="bg-primary/5 text-black md:pt-sections pt-middel">
-      <div className="container mx-auto grid sm:grid-cols-[repeat(2,250px)] xl:grid-cols-[repeat(4,250px)] justify-between md:gap-sections gap-items">
+      <div className="container mx-auto grid px-5 sm:grid-cols-[repeat(2,250px)] xl:grid-cols-[repeat(4,250px)] justify-between md:gap-sections gap-items">
 
         {/* About Section */}
         <div>
