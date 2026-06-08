@@ -1,4 +1,5 @@
 // import SearchProperties from '@/components/global/search-properties'
+import SearchProperties from '@/components/global/search-properties'
 import { basicInfo } from '@/stores/basic-info'
 import React from 'react'
 
@@ -14,7 +15,7 @@ export default function HeroSection() {
           </div>
           
           <div className="mt-8">
-            {/* <SearchProperties /> */}
+            <SearchProperties />
           </div>
         </div>
       </section>
