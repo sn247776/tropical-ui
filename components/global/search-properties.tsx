@@ -18,7 +18,6 @@ import {
   rentPriceRanges,
   buyPriceRanges,
 } from '@/stores/data-list';
-import LocationSelector from './location-list';
 import { LocationCitySelect } from './location-selector/city-select';
 import { LocationAreaSelect } from './location-selector/area-select';
 
