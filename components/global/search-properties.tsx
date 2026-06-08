@@ -18,23 +18,30 @@ import {
   rentPriceRanges,
   buyPriceRanges,
 } from '@/stores/data-list';
-import { LocationListSelect } from './location-list';
+import LocationSelector from './location-list';
+import { LocationCitySelect } from './location-selector/city-select';
+import { LocationAreaSelect } from './location-selector/area-select';
+
 
 const SearchProperties = () => {
   const router = useRouter();
-  const [locations, setLocations] = useState<string[]>([]);
   const [listingType, setListingType] = useState('');
   const [priceRange, setPriceRange] = useState('');
+
+    const [city, setCity] = React.useState("")
+  const [areas, setAreas] = React.useState<string[]>([])
+
+  const handleCityChange = (newCity: string) => {
+    setCity(newCity)
+
+    setAreas([])
+  }
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
 
     const params = new URLSearchParams();
     
-    // Join locations with commas and add to params
-    if (locations.length > 0) {
-      params.append('location', locations.join(','));
-    }
     
     if (listingType) params.append('listingType', listingType);
 
@@ -60,10 +67,10 @@ const SearchProperties = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-6">
+    <div className="w-full mx-auto bg-white rounded-lg shadow-lg p-6">
       <form
         onSubmit={handleSearch}
-        className="grid grid-cols-1 md:grid-cols-4 gap-4"
+        className="grid grid-cols-1 md:grid-cols-5 gap-4"
       >
         {/* Listing Type Select */}
         <div className="col-span-1">
@@ -107,16 +114,30 @@ const SearchProperties = () => {
           </Select>
         </div>
 
+
+
         {/* Location Select */}
         <div className="col-span-1">
           <label htmlFor="location" className="text-sm text-gray-500 mb-1 block">
             Location(s)
           </label>
-          <LocationListSelect 
-            maxW='w-full' 
-            value={locations} 
-            setValue={setLocations} 
-          />
+                <LocationCitySelect
+        value={city}
+        setValue={handleCityChange}
+      />
+
+        </div>
+
+                <div className="col-span-1">
+          <label htmlFor="Area" className="text-sm text-gray-500 mb-1 block">
+            Area
+          </label>
+
+      <LocationAreaSelect
+        city={city}
+        value={areas}
+        setValue={setAreas}
+      />
         </div>
 
         {/* Search Button */}

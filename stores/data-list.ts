@@ -37,25 +37,38 @@ export const allPriceRanges = [
   { label: "Above ₹5,00,00,000", value: "50000000-" },
 ];
 
-  export const locationsList = [
-  "Sector 43",
-  "DLF Phase 5",
-  "B Block Sushant Lok-1",
-  "C Block Sushant Lok-1",
-  "Sushant Lok-1",
-  "Sector 42",
-  "DLF Phase 4",
-  "Sector 55",
-  "Sector 54 Gurgaon",
-  "Sector 28",
-  "G Block, DLF Phase 1",
-  "F Block, Gurgaon",
-  "A Block Sushant Lok-1",
-  "DLF Phase 1",
-  "DLF Phase 2",
-  "Sector 45",
-  "Sector 27",
-  "P Block",
-  "Sector 49 Gurgaon",
-  "A Block, Sushant Lok-1"
-];
+export const locationsData = {
+  "Koh Phangan": [
+    "Hin Kong",
+    "Sri Thanu",
+    "Haad Yao",
+    "Haad Salad",
+    "Thong Sala",
+    "Chaloklum",
+    "Baan Tai",
+    "Haad Rin",
+    "Mae Haad",
+    "Wok Tum",
+  ],
+
+  "Koh Samui": [
+    "Chaweng",
+    "Lamai",
+    "Bophut",
+    "Maenam",
+    "Bangrak",
+    "Choeng Mon",
+    "Plai Laem",
+    "Nathon",
+  ],
+
+  "Phuket": [
+    "Bang Tao",
+    "Kamala",
+    "Patong",
+    "Kata",
+    "Karon",
+    "Rawai",
+    "Nai Harn",
+  ],
+}
