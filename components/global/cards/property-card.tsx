@@ -65,7 +65,7 @@ const PropertyCard = ({ property, viewType = "grid", }: PropertyCardProps) => {
               </div>
               <div className="mt-2 flex items-center gap-2 text-sm">
                 <span className="bg-gray-100 px-2 py-1 rounded-md">
-                  {area} sq.ft
+                  {area} m²
                 </span>
                 {furnishedStatus && (
                   <span className="bg-gray-100 px-2 py-1 rounded-md capitalize">

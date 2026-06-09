@@ -1,0 +1,243 @@
+export const demoProperty = {
+  "_id": "685e6fb578558dd3089867e0",
+  "name": "1 RK FULLY FURNISHED NEW",
+  "slug": "300-sqft-1RK-bhk-flat-gurgaon-74046573",
+  "propertyCode": "P83993",
+  "listingType": "rent",
+  "parkingNumber": 0,
+  "facing": "South-West",
+  "location": "Gurgaon",
+  "sectorArea": "Sector 42",
+  "area": 300,
+  "areaUnit": "m²",
+  "bhk": "1RK",
+  "servantRoomCount": 0,
+  "balconyCount": 1,
+  "bathrooms": 1,
+  "floorNumber": 5,
+  "price": 20000,
+  "securityDeposit": 40000,
+  "propertyType": "floor",
+  "furnishedStatus": "furnished",
+  "leaseType": [
+    "Bachelor Male",
+    "Bachelor Female"
+  ],
+  "isOwnerInfo": false,
+  "isClosure": false,
+  "lat_long": "28.4600458, 77.1009866",
+  "possibleTenantVisit": "2025-06-27T10:13:00.000Z",
+  "propertyAge": 2,
+  "availableFrom": "2025-07-01T10:13:00.000Z",
+  "isAvailable": true,
+  "essentials": [
+    "Electricity Supply",
+    "Lift",
+    "RO",
+    "Water Supply",
+    "Parking",
+    "Security",
+    "CCTV",
+    "Inverter Backup"
+  ],
+  "additionalHighlights": [
+    "AC",
+    "Geyser",
+    "Lights",
+    "Fan",
+    "Bed with Mattress",
+    "Sofa",
+    "Wardrobe",
+    "Modular Kitchen",
+    "Chimney",
+    "Attached Bathroom",
+    "Inverter/Power Backup",
+    "Lift",
+    "Stilt Parking"
+  ],
+  "amenities": [],
+  "description": "<p><strong>1 RK Fully Furnished – Sector 42, Gurugram</strong><br>Smart and compact studio-style unit ideal for single professionals or corporate tenants. Thoughtfully furnished with modern interiors, this ready-to-move-in space offers comfort and privacy.</p><p><strong>✨ Location Benefits:</strong><br>Situated just off Golf Course Road 🏌️, near Rapid Metro 🚇, close to One Horizon Center 🏢, elite clubs 🏸, cafes ☕, and key business districts – perfect blend of convenience and lifestyle.</p><p><strong>🔑 Key Features &amp; Amenities:</strong><br>Fully Furnished, AC, Geyser, Lights, Fan, Bed with Mattress, Sofa, Wardrobe, Modular Kitchen with Chimney, Attached Bathroom, Power Backup/Inverter, Lift, Stilt Parking,</p>",
+  "images": [
+    "https://res.cloudinary.com/debu5s2tj/image/upload/v1751019287/guqte13tm34smuwm9tcf.jpg",
+    "https://res.cloudinary.com/debu5s2tj/image/upload/v1751019286/wrk3f86fkves2obsrvui.jpg",
+    "https://res.cloudinary.com/debu5s2tj/image/upload/v1751019289/omjpdzqun4bzktrt2a0a.jpg",
+    "https://res.cloudinary.com/debu5s2tj/image/upload/v1751019290/nwsko3dq1gc6fwzhdewj.jpg",
+    "https://res.cloudinary.com/debu5s2tj/image/upload/v1751019292/uck8hvdm9dtktkmr2bbt.jpg",
+    "https://res.cloudinary.com/debu5s2tj/image/upload/v1751019293/u6pqttbec7lt54edcmij.jpg"
+  ],
+  "createdBy": {
+    "_id": "682fff25504e428b67cf2d53",
+    "name": "Sachin",
+    "phone": "7368008220"
+  },
+  "views": 114,
+  "createdAt": "2025-06-27T10:17:25.609Z",
+  "updatedAt": "2026-06-09T16:57:33.585Z",
+  "__v": 0,
+  "createdByModel": "User",
+  "requestStatus": "approved",
+  "carpetArea": 0,
+  "indoorParkingCount": 0,
+  "lastUpdatedBy": "682fff25504e428b67cf2d53",
+  "locationId": {
+    "_id": "6878a810ccc10a1b64dbb921",
+    "locationName": "",
+    "sector": "Sector 42",
+    "city": "Gurugram",
+    "landmarks": [
+      "SHIV NADAR SCHOOL",
+      "QUTAB PLAZA",
+      "RAPID METRO"
+    ],
+    "createdAt": "2025-07-17T07:36:48.341Z",
+    "updatedAt": "2025-07-31T17:08:01.403Z",
+    "__v": 0,
+    "id": "6878a810ccc10a1b64dbb921"
+  },
+  "maintenanceCharge": 0,
+  "outdoorParkingCount": 0,
+  "constructionStatus": "ready to move",
+  "transactionType": "new booking",
+  "geoLocation": {
+    "type": "Point",
+    "coordinates": [
+      28.4600458,
+      77.1009866
+    ]
+  },
+  "id": "685e6fb578558dd3089867e0",
+  "similarProperties": [
+    {
+      "_id": "69a1639de15273a95f3472cc",
+      "name": "1 Rk Fully Furnished",
+      "slug": "400-sqft-1RK-bhk-floor-24718264",
+      "listingType": "rent",
+      "propertyType": "floor",
+      "locationId": {
+        "_id": "6878ab78ccc10a1b64dbbdf1",
+        "locationName": "",
+        "sector": "Sector 43",
+        "city": "Gurugram",
+        "landmarks": [],
+        "createdAt": "2025-07-17T07:51:20.375Z",
+        "updatedAt": "2025-07-17T07:51:20.375Z",
+        "__v": 0,
+        "id": "6878ab78ccc10a1b64dbbdf1"
+      },
+      "area": 400,
+      "areaUnit": "m²",
+      "bhk": "1RK",
+      "bathrooms": 1,
+      "price": 27000,
+      "furnishedStatus": "furnished",
+      "isAvailable": true,
+      "images": [
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1772184445/uuv1mz69pjyktqpgtjwm.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1772184369/w7mcojzoz5ojgagramtv.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1772184375/vtr4upz8hsvlij0rpmtj.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1772184377/u5ypdtqjdqvhf6gv3vr2.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1772184384/l3wslccdk9pvmgtmpbea.jpg"
+      ],
+      "id": "69a1639de15273a95f3472cc"
+    },
+    {
+      "_id": "688af48418e484665ac46dfc",
+      "name": "1 ROOM SET",
+      "slug": "350-sqft-1RK-bhk-floor-76249096",
+      "listingType": "rent",
+      "propertyType": "floor",
+      "locationId": {
+        "_id": "6878b523018f3f3ffbe37f47",
+        "locationName": "B Block - Sushant Lok Phase 1",
+        "sector": "Sector 27",
+        "city": "Gurugram",
+        "landmarks": [],
+        "createdAt": "2025-07-17T08:32:35.221Z",
+        "updatedAt": "2025-07-17T08:36:34.819Z",
+        "__v": 0,
+        "id": "6878b523018f3f3ffbe37f47"
+      },
+      "area": 350,
+      "areaUnit": "yards",
+      "bhk": "1RK",
+      "bathrooms": 1,
+      "price": 22000,
+      "furnishedStatus": "furnished",
+      "isAvailable": true,
+      "images": [
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1753937005/vjrflnpasrovpnte75xu.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1753937006/gyqbnpbjgjufw9b1irib.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1753937006/hhoz7rij5wfe2qobscwf.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1753937007/kymqsysnrmeabgpjuoub.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1753937008/uf0qn81shazxg47dtu22.jpg"
+      ],
+      "id": "688af48418e484665ac46dfc"
+    },
+    {
+      "_id": "6882190818e484665ac3b53e",
+      "name": "1 RK FULLY FURNISHED",
+      "slug": "160-sqft-1RK-bhk-floor-74701473",
+      "listingType": "rent",
+      "propertyType": "floor",
+      "locationId": {
+        "_id": "6878b548018f3f3ffbe37f5f",
+        "locationName": "C Block - Sushant Lok Phase 1",
+        "sector": "Sector 43",
+        "city": "Gurugram",
+        "landmarks": [],
+        "createdAt": "2025-07-17T08:33:12.812Z",
+        "updatedAt": "2025-07-17T08:33:12.812Z",
+        "__v": 0,
+        "id": "6878b548018f3f3ffbe37f5f"
+      },
+      "area": 160,
+      "areaUnit": "yards",
+      "bhk": "1RK",
+      "bathrooms": 1,
+      "price": 35000,
+      "furnishedStatus": "furnished",
+      "isAvailable": true,
+      "images": [
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1753356540/wypvdhdnrkru9tgsadqm.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1753356538/obywrijubdaxjvwjl3dg.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1753356539/yldsu20cnrgcwr5rju8f.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1753356541/rcgmt9ubjk2jsj743rcp.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1753356542/jhwdjlwgpusp6z6k64ji.jpg"
+      ],
+      "id": "6882190818e484665ac3b53e"
+    },
+    {
+      "_id": "687a29ec6a0dd6b0fe2413cf",
+      "name": "1 Rk Luxury Floor",
+      "slug": "300-sqft-1RK-bhk-floor-99551701",
+      "listingType": "rent",
+      "propertyType": "floor",
+      "locationId": {
+        "_id": "6878ab78ccc10a1b64dbbdf1",
+        "locationName": "",
+        "sector": "Sector 43",
+        "city": "Gurugram",
+        "landmarks": [],
+        "createdAt": "2025-07-17T07:51:20.375Z",
+        "updatedAt": "2025-07-17T07:51:20.375Z",
+        "__v": 0,
+        "id": "6878ab78ccc10a1b64dbbdf1"
+      },
+      "area": 300,
+      "areaUnit": "m²",
+      "bhk": "1RK",
+      "bathrooms": 1,
+      "price": 25000,
+      "furnishedStatus": "furnished",
+      "isAvailable": true,
+      "images": [
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1752836558/fstueducv3zbw5anotvt.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1752836559/bp3rkhem5u1rqf8icsje.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1752836560/dioyutszxjpek7nd1vgi.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1752836561/eexdbbzy0ost0pszrykw.jpg",
+        "https://res.cloudinary.com/debu5s2tj/image/upload/v1752836563/ugtsu8lx8dvwlugdfep9.jpg"
+      ],
+      "id": "687a29ec6a0dd6b0fe2413cf"
+    }
+  ]
+}
