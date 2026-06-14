@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { basicInfo } from "@/stores/basic-info";
 import "./main.css";
 import "./globals.css";
+import "./range.css";
 import { Inter, Poppins } from 'next/font/google';
 import { Toaster } from "@/components/ui/sonner"
 

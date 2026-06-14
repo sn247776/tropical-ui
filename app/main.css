@@ -2,7 +2,7 @@
 
 .swiper-pagination-bullet-active {
   /* swipper pagination color change */
-  background: hsl(var(--primary)) !important;
+  background: var(--primary) !important;
 }
 
 .swiper-button-next,
@@ -12,7 +12,7 @@
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-  --swiper-navigation-color:hsl(var(--primary)) !important;
+  --swiper-navigation-color:var(--primary) !important;
 }
 
 .property-slider{
@@ -108,3 +108,4 @@
       @apply bg-transparent p-0;
     }
   }
+

@@ -2,24 +2,16 @@ export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/spaces", label: "Spaces" },
   { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
 
-  {
-    label: "Requirement",
-    href: "/requirement",
-  },
+
 ];
 
 export const commercialLinks = [
   { href: "/commercial", label: "Home" },
   { href: "/commercial/spaces", label: "Spaces" },
   { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
 
-  {
-    label: "Requirement",
-    href: "/requirement",
-  },
+
 ];
 
 export const quickLinks = [
