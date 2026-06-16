@@ -38,7 +38,7 @@ const PropertyCard = ({ property, viewType = "grid", }: PropertyCardProps) => {
           <div className="p-4 md:w-2/3 flex flex-col justify-between">
             <div>
               <div className="flex justify-between items-start">
-                <h3 className="text-lg font-bold">{property?.name} {property?.propertyCode&& `(${property?.propertyCode})`}</h3>
+                <h3 className="text-lg font-bold text-primary">{property?.name} </h3>
                 {!isAvailable ? (
                   <Badge
                     variant="outline"
@@ -52,7 +52,7 @@ const PropertyCard = ({ property, viewType = "grid", }: PropertyCardProps) => {
                     {listingType === "rent" ? "Rent" : "Buy"}
                   </Badge>}
               </div>
-              <p className="text-2xl font-bold text-primary mt-1">
+              <p className="text-lg font-bold mt-1">
                 THB {formatCurrency(price)}
               </p>
               <div className="mt-1 text-gray-500 flex items-center gap-1">
@@ -118,7 +118,7 @@ const PropertyCard = ({ property, viewType = "grid", }: PropertyCardProps) => {
         </div>
       </div>
       <div className="p-4">
-        <h3 className="font-bold">{property?.name} {property?.propertyCode&& `(${property?.propertyCode})`}</h3>
+        <h3 className="font-bold text-primary">{property?.name} </h3>
         <div className="mt-1 text-gray-500 text-sm flex items-center gap-1">
           <MapPin className="h-3 w-3" />
           <span className="flex gap-2">

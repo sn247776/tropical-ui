@@ -59,7 +59,7 @@ export default async function PropertiesPage({
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-xl font-bold sm:text-3xl">
+        <h1 className="text-xl font-bold sm:text-3xl text-primary">
           Available Spaces
         </h1>
 

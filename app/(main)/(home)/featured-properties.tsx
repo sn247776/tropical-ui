@@ -14,9 +14,9 @@ export default async function FeaturedProperties() {
     <section className="py-12 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold">Featured Spaces</h2>
+          <h2 className="text-2xl font-bold text-primary">Handpicked Homes</h2>
           <Button asChild>
-            <Link href="/spaces">All Spaces</Link>
+            <Link href="/spaces">Explore All</Link>
           </Button>
         </div>
         

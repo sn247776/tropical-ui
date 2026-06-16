@@ -11,6 +11,7 @@ export const listingTypes = [
   { label: "All Listing Types", value: "all" },
   { label: "Buy", value: "buy" },
   { label: "Rent", value: "rent" },
+    { label: " Daily Rental", value: "day" },
 ];
 
 export const furnishedStatus = [

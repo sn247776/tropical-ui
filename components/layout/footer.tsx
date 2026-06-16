@@ -13,7 +13,7 @@ export default function Footer() {
         {/* About Section */}
         <div>
           <h2 className="text-primary text-2xl font-semibold">About</h2>
-          <p className="my-middel">
+          <p className="my-middel text-primary/70 ">
             {basicInfo?.name} is a comprehensive real estate management platform based in Thiland, offering tech driven solutions for leasing, selling, and managing properties from possession to post-sale.
           </p>
 
@@ -32,7 +32,7 @@ export default function Footer() {
               <Link 
                 key={link.href}
                 href={link.href}
-                className="hover:text-primary duration-300"
+                className="hover:text-primary text-primary/70 duration-300"
               >
                 {link.label}
               </Link>
@@ -48,7 +48,7 @@ export default function Footer() {
               <Link 
                 key={link.href}
                 href={link.href}
-                className="hover:text-primary duration-300"
+                className="hover:text-primary text-primary/70  duration-300"
               >
                 {link.label}
               </Link>
@@ -60,9 +60,9 @@ export default function Footer() {
         <div>
           <h2 className="text-primary text-2xl font-semibold">Contact Us</h2>
           <div className="my-middel">
-            <p className="sm:mb-middel mb-items font-semibold no-underline">Call Us: <span className="text-primary no-underline">{basicInfo?.phones[0]}</span></p>
-            <p className="no-underline">Email: <span className="text-primary no-underline">{basicInfo?.emails[0]}</span> </p>
-            <p className="mt-2">
+            <p className="sm:mb-middel mb-items font-semibold no-underline text-primary">Call Us: <span className="text-primary/70 no-underline">{basicInfo?.phones[0]}</span></p>
+            <p className="no-underline text-primary">Email: <span className="text-primary/70  no-underline">{basicInfo?.emails[0]}</span> </p>
+            <p className="mt-2 text-primary/70 ">
               For consultations, site visits, or property assistance, feel free to reach out. We're here to simplify your real estate journey.
             </p>
           </div>

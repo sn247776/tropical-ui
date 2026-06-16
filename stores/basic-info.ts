@@ -1,6 +1,6 @@
 export const basicInfo =   {
     name:'Tropical Roots Realty',
-    tagline:'Prop tech makes it easy',
+    tagline:'Find Your Corner of Paradise.',
     phones: ["+91 7042104442", "+91 1010101010"],
     emails: ["leasebuysellindia@gmail.com", "support@example.com"],
     address: "Sushant Lok Phase 1",
