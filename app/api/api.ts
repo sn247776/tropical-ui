@@ -1,0 +1,1 @@
+export const baseURL = 'https://jellyfish-app-vj53j.ondigitalocean.app/api'

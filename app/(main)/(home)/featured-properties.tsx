@@ -1,15 +1,12 @@
-// import { fetchHomeInfo } from '@/app/api/home';
 import PropertyCard from '@/components/global/cards/property-card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { propertiesList } from './examples'
+import { fetchHomeInfo } from '@/app/api/home';
 
 
 
 export default async function FeaturedProperties() {
-    // const properties = await fetchHomeInfo();
-
-    const properties = propertiesList;
+    const properties = await fetchHomeInfo();
   return (
     <section className="py-12 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -20,10 +17,10 @@ export default async function FeaturedProperties() {
           </Button>
         </div>
         
-        {properties?.length > 0 ? (
+        {properties?.data?.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {properties.map((property:any) => (
-              <PropertyCard key={property?.id} property={property} />
+            {properties.data?.map((property:any) => (
+              <PropertyCard key={property?._id} property={property} />
             ))}
           </div>
         ) : (

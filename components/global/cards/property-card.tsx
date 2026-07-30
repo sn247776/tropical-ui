@@ -42,14 +42,14 @@ const PropertyCard = ({ property, viewType = "grid", }: PropertyCardProps) => {
                 {!isAvailable ? (
                   <Badge
                     variant="outline"
-                    className="bg-red-50 text-red-500 border-red-200"
+                    className="bg-red-50 text-red-500 border-red-200 "
                   >
                     Not Available
                   </Badge>
                 ):  <Badge
-  
+                className="capitalize"
                   >
-                    {listingType === "rent" ? "Rent" : "Buy"}
+                    {listingType}
                   </Badge>}
               </div>
               <p className="text-lg font-bold mt-1">
@@ -93,7 +93,7 @@ const PropertyCard = ({ property, viewType = "grid", }: PropertyCardProps) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow duration-300 animate-fade-in">
       <div className="relative overflow-hidden">
- <PropertyCardSlider images={images?.slice(0, 5)}/>
+ <PropertyCardSlider images={images}/>
         {!isAvailable ? (
           <div className="absolute top-2 right-2">
             <Badge
@@ -103,12 +103,12 @@ const PropertyCard = ({ property, viewType = "grid", }: PropertyCardProps) => {
               Not Available
             </Badge>
           </div>
-        ):          <div className="absolute top-2 right-2">
+        ):          <div className="absolute top-2 right-2 capitalize">
             <Badge
               
               
             >
-              {listingType === "rent" ? "Rent" : "Buy"}
+              {listingType}
             </Badge>
           </div> }
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 z-20">

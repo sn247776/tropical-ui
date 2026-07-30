@@ -7,7 +7,7 @@ import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 
-function PropertyCardSlider({ images }: { images: string[] }) {
+function PropertyCardSlider({ images }:any) {
   const [showSlider, setShowSlider] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ function PropertyCardSlider({ images }: { images: string[] }) {
         // Show static first image by default
         <img
           loading="lazy"
-          src={images[0]}
+          src={images[0]?.url}
           alt="Property"
           className="w-full h-[200px] object-cover"
         />
@@ -40,11 +40,11 @@ function PropertyCardSlider({ images }: { images: string[] }) {
           modules={[EffectFade, Pagination, Autoplay]}
           className="property-slider"
         >
-          {images.map((src, index) => (
+          {images.map((src:any, index:any) => (
             <SwiperSlide key={index}>
               <img
                 loading="lazy"
-                src={src}
+                src={src?.url}
                 alt={`Slide ${index}`}
                 className="w-full h-[200px] object-cover"
               />
