@@ -21,10 +21,10 @@ import {
   furnishedStatus,
 } from "@/stores/data-list";
 import DualRangeSlider from "@/components/global/range";
-import { formatCurrency } from "@/components/global/format-currency";
 import { LocationListSelect } from "@/components/global/location-list";
 import { Input } from "@/components/ui/input";
 import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
+import CurrencyProvider from "@/components/global/currency-provider";
 
 type FilterState = {
   bhk: string;
@@ -321,8 +321,9 @@ const PropertyFilter = () => {
                 onChange={handlePriceChange}
               />
               <div className="flex text-xs justify-between mt-1">
-                <span>THB {formatCurrency(Number(filters.minPrice))}</span>
-                <span>THB {formatCurrency(Number(filters.maxPrice))}</span>
+                                <CurrencyProvider price={Number(filters.minPrice)}  />
+                                 <CurrencyProvider price={Number(filters.maxPrice)}  />
+
               </div>
             </div>
           </div>

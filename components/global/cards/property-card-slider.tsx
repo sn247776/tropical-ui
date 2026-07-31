@@ -1,52 +1,64 @@
 "use client";
-import React, { useState } from "react";
+
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade, Pagination, Autoplay } from "swiper/modules";
+import {
+  EffectFade,
+  Pagination,
+  Autoplay,
+} from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
-import "swiper/css/autoplay";
 
-function PropertyCardSlider({ images }:any) {
+export default function PropertyCardSlider({ images = [] }: any) {
   const [showSlider, setShowSlider] = useState(false);
+
+  if (!images?.length) {
+    return (
+      <img
+        src="/placeholder.jpg"
+        alt="Property"
+        className="w-full h-[200px] object-cover"
+      />
+    );
+  }
 
   return (
     <div
+      className="relative h-[200px]"
       onMouseEnter={() => setShowSlider(true)}
       onTouchStart={() => setShowSlider(true)}
-      onClick={() => setShowSlider(true)}
-      className="relative"
     >
       {!showSlider ? (
-        // Show static first image by default
         <img
-          loading="lazy"
           src={images[0]?.url}
           alt="Property"
-          className="w-full h-[200px] object-cover"
+          loading="lazy"
+          className="w-full h-full object-cover"
         />
       ) : (
-        // Show full slider after interaction - starting with second image
         <Swiper
-          loop={true}
-          slidesPerView={1}
+          modules={[EffectFade, Pagination, Autoplay]}
           effect="fade"
-          pagination={{ clickable: true }}
+          loop
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
           }}
-          initialSlide={1} // This makes the slider start with the second image (index 1)
-          modules={[EffectFade, Pagination, Autoplay]}
-          className="property-slider"
+          pagination={{
+            clickable: true,
+          }}
+          className="h-full w-full"
         >
-          {images.map((src:any, index:any) => (
-            <SwiperSlide key={index}>
+          {images.map((img: any, index: number) => (
+            <SwiperSlide key={img._id || index}>
               <img
+                src={img.url}
+                alt={`Property ${index + 1}`}
                 loading="lazy"
-                src={src?.url}
-                alt={`Slide ${index}`}
-                className="w-full h-[200px] object-cover"
+                className="w-full h-full object-cover"
               />
             </SwiperSlide>
           ))}
@@ -55,5 +67,3 @@ function PropertyCardSlider({ images }:any) {
     </div>
   );
 }
-
-export default PropertyCardSlider;

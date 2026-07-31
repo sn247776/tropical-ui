@@ -9,54 +9,61 @@ import DetailsSection from "../../sections/details-section";
 import LocationHighlights from "../../sections/location-highlights";
 import SimilarProperties from "../../sections/similar-properties";
 import CallToAction from "../../sections/call-to-action";
-import { demoProperty } from "./demo";
-// import { fetchPropertyInfo } from "@/app/api/properties";
+import { fetchPropertyInfo } from "@/app/api/listing-info";
+
 
 
 interface IParams {
+  type?: any
   id?: any;
 }
 
-export default function PropertieDetails({
+export default async function PropertieDetails({
   params,
 }: {
   params: IParams;
 }) {
-//   const slug: any = params.id;
-//   const property: any = await fetchPropertyInfo(slug);
-const property:any = demoProperty;
+  const { type, id } = await params;
+  const property = await fetchPropertyInfo(type, id);
+
 
   return (
-    <div className="container py-8 mx-auto">
+    <div className="container py-8 mx-auto px-4">
 
-      <PropertyHeader property={property}/>
+      <PropertyHeader property={property} />
 
       {/* Action Buttons */}
-      <ActionButtons property={property}/>
+      <ActionButtons property={property} />
       {/* Image Slider */}
       <div className="mb-8 rounded-md overflow-hidden shadow-lg hidden md:block">
         <PropertieSlider property={property} />
       </div>
 
-            <div className="mb-8 rounded-md overflow-hidden shadow-lg  md:hidden">
+      <div className="mb-8 rounded-md overflow-hidden shadow-lg  md:hidden">
         <MobileSlider property={property} />
       </div>
 
       {/* Property Highlights */}
-      <PropertyHighlights property={property}/>
+      <PropertyHighlights property={property} />
 
       {/* Description Section */}
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Description</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div 
-            className="basic-text-style"
-            dangerouslySetInnerHTML={{ __html: property.description }}
-          />
-        </CardContent>
-      </Card>
+
+      {property?.description &&
+
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle>Description</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div
+              className="basic-text-style"
+              dangerouslySetInnerHTML={{ __html: property?.description }}
+            />
+          </CardContent>
+        </Card>}
+
+
+
 
       {/* Details Section */}
       <DetailsSection property={property} />
@@ -64,10 +71,10 @@ const property:any = demoProperty;
       {/* Location Highlights (if available in description) */}
 
       <LocationHighlights property={property} />
-<SimilarProperties properties={property?.similarProperties}/>
+      <SimilarProperties properties={property?.similarProperties} />
       {/* Call to Action */}
-      <CallToAction property={property}/>
-      
+      <CallToAction property={property} />
+
     </div>
   );
 }

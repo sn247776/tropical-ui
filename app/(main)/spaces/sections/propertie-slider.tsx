@@ -1,24 +1,44 @@
 "use client";
+
 import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+} from "@/components/ui/dialog";
+
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Thumbs } from "swiper/modules";
+import {
+  Navigation,
+  Thumbs,
+} from "swiper/modules";
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+
 import { MapPin } from "lucide-react";
 
 function PropertieSlider({ property }: any) {
   const images = property?.images || [];
+
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Get the images to display in each box
-  const mainImage = images[0] || "/placeholder.jpg";
-  const secondaryImage = images[1] || mainImage;
-  const thirdImage = images[2] || secondaryImage || mainImage;
-  const remainingCount = Math.max(0, images.length - 3);
+  const mainImage =
+    images[0]?.url || "/placeholder.jpg";
+
+  const secondImage =
+    images[1]?.url || mainImage;
+
+  const thirdImage =
+    images[2]?.url || secondImage;
+
+  const remainingCount = Math.max(
+    0,
+    images.length - 3
+  );
 
   const openImageDialog = (index: number) => {
     setActiveIndex(index);
@@ -26,83 +46,177 @@ function PropertieSlider({ property }: any) {
   };
 
   return (
-    <div>
-      {/* Original Image Grid */}
-      <div className="grid lg:grid-cols-[1fr_400px] grid-cols-2 gap-4 h-[450px] overflow-hidden">
-        <div className="relative cursor-pointer" onClick={() => openImageDialog(0)}>
-          <img className="object-cover w-full h-full" src={mainImage} alt="Property main" />
+    <>
+      <div className="grid lg:grid-cols-[1fr_420px] grid-cols-2 gap-4 h-[500px] overflow-hidden rounded-xl">
+
+        {/* Main Image */}
+        <div
+          className="relative cursor-pointer group overflow-hidden rounded-xl"
+          onClick={() => openImageDialog(0)}
+        >
+          <img
+            src={mainImage}
+            alt={property.name}
+            className="w-full h-full object-cover transition duration-500 group-hover:scale-105"
+          />
+
+          {/* Top Left */}
+          <div className="absolute top-4 left-4 flex gap-2">
+
+            <Badge className="capitalize">
+              {property.listingType}
+            </Badge>
+
+            <Badge variant="secondary">
+              {property.propertyCode}
+            </Badge>
+
+          </div>
+
+          {/* Top Right */}
           {!property.isAvailable && (
             <Badge
-              variant="outline"
-              className="absolute top-4 right-4 bg-red-50 text-red-500 border-red-200 z-10"
+              variant="destructive"
+              className="absolute top-4 right-4"
             >
               Not Available
             </Badge>
           )}
+
+          {/* Bottom */}
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+
+            <h2 className="text-white text-2xl font-bold">
+              {property.name}
+            </h2>
+
+            <div className="flex items-center text-white/90 mt-2">
+
+              <MapPin size={16} className="mr-2" />
+
+              <span>
+                {[
+                  property.locationId?.area,
+                  property.locationId?.district,
+                  property.locationId?.province,
+                ]
+                  .filter(Boolean)
+                  .join(", ")}
+              </span>
+
+            </div>
+
+          </div>
         </div>
 
+        {/* Side Images */}
         <div className="flex flex-col gap-4">
-          <img 
-            className="h-[225px] object-cover cursor-pointer" 
-            src={secondaryImage} 
-            alt="Property secondary" 
+
+          <img
+            src={secondImage}
+            alt=""
             onClick={() => openImageDialog(1)}
+            className="h-[242px] w-full rounded-xl object-cover cursor-pointer hover:opacity-90 transition"
           />
-          <div className="relative h-[225px] cursor-pointer" onClick={() => openImageDialog(2)}>
+
+          <div
+            className="relative h-[242px] cursor-pointer"
+            onClick={() => openImageDialog(2)}
+          >
             {remainingCount > 0 && (
-              <div className="absolute top-0 z-10 bg-black/50 w-full h-full text-white flex items-center justify-center text-3xl font-semibold">
-                + {remainingCount} more
+              <div className="absolute inset-0 bg-black/55 rounded-xl flex items-center justify-center text-white text-3xl font-bold z-10">
+                +{remainingCount} Photos
               </div>
             )}
+
             <img
-              className="h-full w-full object-cover absolute"
               src={thirdImage}
-              alt="Property third"
+              alt=""
+              className="h-full w-full rounded-xl object-cover"
             />
           </div>
+
         </div>
       </div>
 
-      {/* Image Dialog with Swiper */}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent closeButtonSize="xl" className="max-w-screen h-screen select-none">
+      {/* Full Screen Gallery */}
+
+      <Dialog
+        open={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+      >
+        <DialogContent
+          closeButtonSize="xl"
+          className="max-w-screen h-screen"
+        >
           <DialogHeader>
-            <div>
-              <h1 className="text-2xl font-bold">{property.name}</h1>
-              <div className="flex items-center text-gray-600 ">
-                <MapPin className="h-4 w-4 mr-1" />
-                <span>
-                  {property.location}
-                  {property.sectorArea && `, ${property.sectorArea}`}
-                </span>
+
+            <div className="space-y-2">
+
+              <div className="flex items-center gap-2">
+
+                <Badge className="capitalize">
+                  {property.listingType}
+                </Badge>
+
+                <Badge variant="outline">
+                  {property.propertyCode}
+                </Badge>
+
               </div>
+
+              <h1 className="text-3xl font-bold">
+                {property.name}
+              </h1>
+
+              <div className="flex items-center text-muted-foreground">
+
+                <MapPin className="w-4 h-4 mr-2" />
+
+                <span>
+                  {[
+                    property.locationId?.area,
+                    property.locationId?.district,
+                    property.locationId?.province,
+                  ]
+                    .filter(Boolean)
+                    .join(", ")}
+                </span>
+
+              </div>
+
             </div>
+
           </DialogHeader>
+
           <Swiper
             modules={[Navigation, Thumbs]}
-            spaceBetween={10}
-            slidesPerView={2}
-            centeredSlides={true}
-            initialSlide={activeIndex}
             navigation
-            className="h-[85vh] w-full overflow-hidden "
-            onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+            initialSlide={activeIndex}
+            centeredSlides
+            slidesPerView={2}
+            spaceBetween={20}
+            className="h-[84vh] w-full"
+            onSlideChange={(swiper) =>
+              setActiveIndex(swiper.activeIndex)
+            }
           >
-            {images.map((image: string, index: number) => (
-              <SwiperSlide key={index} className=" w-full h-full">
-                <div className="relative w-full h-full">
+            {images.map(
+              (image: any, index: number) => (
+                <SwiperSlide key={index}>
                   <img
-                    src={image}
-                    alt={`Property image ${index + 1}`}
-                    className="w-full h-full absolute object-cover"
+                    src={image.url}
+                    alt={`${property.name}-${index}`}
+                    className="w-full h-full object-cover rounded-lg"
                   />
-                </div>
-              </SwiperSlide>
-            ))}
+                </SwiperSlide>
+              )
+            )}
           </Swiper>
+
         </DialogContent>
       </Dialog>
-    </div>
+    </>
   );
 }
 
