@@ -102,6 +102,7 @@ export default function DetailsSection({ property }: any) {
       items: property.rental_conditions,
     });
   }
+  
 
   return (
     <Card>

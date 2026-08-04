@@ -192,6 +192,7 @@ const iconMap: Record<string, React.ReactNode> = {
   playground: <FaDumbbell className="h-5 w-5" />,
   rain_water_harvesting: <GiWaterSplash className="h-5 w-5" />,
   water_storage: <GiWaterTank className="h-5 w-5" />,
+  
 };
 
 export const renderIcon = (value: string) => {
