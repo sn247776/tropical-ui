@@ -5,7 +5,6 @@ import PropertyFilter from "./sections/property-filter";
 import PropertyListing from "./sections/property-listing";
 import Pagination from "@/components/global/pagination";
 import MobFilters from "./sections/mob-filter";
-import { propertiesList } from "./dummy-list";
 
 type SearchParams = Promise<{
   page?: string;
@@ -54,7 +53,7 @@ export default async function PropertiesPage({
   //   sortOrder,
   // });
 
-  const properties = propertiesList;
+  const properties:any = [];
 
   return (
     <div className="container mx-auto px-4 py-8">

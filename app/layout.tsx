@@ -25,8 +25,10 @@ export default function RootLayout({
     <html
       lang="en"
     >
-      <Toaster />
-      <body className="min-h-full flex flex-col">{children}</body>
+    
+      <body className="min-h-full flex flex-col">
+          <Toaster />
+        {children}</body>
     </html>
   );
 }

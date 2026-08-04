@@ -10,6 +10,7 @@ import LocationHighlights from "../../sections/location-highlights";
 import SimilarProperties from "../../sections/similar-properties";
 import CallToAction from "../../sections/call-to-action";
 import { fetchPropertyInfo } from "@/app/api/listing-info";
+import LocationPropertyInfo from "../../sections/location-property-info";
 
 
 
@@ -50,9 +51,9 @@ export default async function PropertieDetails({
 
       {property?.description &&
 
-        <Card className="mb-8">
+        <Card className="my-8">
           <CardHeader>
-            <CardTitle>Description</CardTitle>
+            <CardTitle className="font-semibold text-primary">Description</CardTitle>
           </CardHeader>
           <CardContent>
             <div
@@ -71,6 +72,8 @@ export default async function PropertieDetails({
       {/* Location Highlights (if available in description) */}
 
       <LocationHighlights property={property} />
+
+      <LocationPropertyInfo property={property} />
       <SimilarProperties properties={property?.similarProperties} />
       {/* Call to Action */}
       <CallToAction property={property} />

@@ -67,7 +67,7 @@ function PropertyHighlights({ property }: any) {
 
         <div>
           <p className="text-xs text-muted-foreground">{label}</p>
-          <p className="font-semibold capitalize">{value}</p>
+          <p className="font-semibold text-primary capitalize">{value}</p>
         </div>
       </div>
     );
@@ -90,7 +90,7 @@ function PropertyHighlights({ property }: any) {
               Property Type
             </p>
 
-            <p className="font-semibold">
+            <p className="font-semibold text-primary">
               {propertyType.label}
             </p>
           </div>

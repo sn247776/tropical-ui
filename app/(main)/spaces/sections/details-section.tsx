@@ -1,58 +1,13 @@
 "use client";
 
-import React from "react";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-
-import {
-  Home,
-  MapPin,
-  ShieldCheck,
-  Sparkles,
-} from "lucide-react";
-
-import {
-  buyType,
-  rentType,
-  leaseType,
-  bhkOptions,
-  areaUnits,
-  furnishedStatuses,
-} from "@/app/form-list";
-
+import { ShieldCheck } from "lucide-react";
 import { renderIcon } from "./icons";
-
-function DetailRow({
-  label,
-  value,
-}: {
-  label: string;
-  value: React.ReactNode;
-}) {
-  if (
-    value === undefined ||
-    value === null ||
-    value === "" ||
-    value === 0
-  ) {
-    return null;
-  }
-
-  return (
-    <>
-      <div className="flex justify-between items-start gap-6">
-        <span className="text-muted-foreground">{label}</span>
-        <span className="font-medium text-right">{value}</span>
-      </div>
-      <Separator />
-    </>
-  );
-}
 
 function FeatureGrid({
   title,
@@ -64,20 +19,22 @@ function FeatureGrid({
   if (!items?.length) return null;
 
   return (
-    <div>
-      <h4 className="font-semibold mb-4">{title}</h4>
+    <div className="rounded-xl border bg-muted/20 p-4 transition-colors hover:border-primary/20">
+      <h4 className="mb-4 font-semibold text-primary">
+        {title}
+      </h4>
 
-      <div className="grid lg:grid-cols-4 md:grid-col-3 gap-3">
+      <div className="space-y-2">
         {items.map((item, index) => (
           <div
             key={index}
-            className="flex items-center gap-3 rounded-lg border p-3"
+            className="flex items-center gap-2 text-sm"
           >
-            <div className="text-primary">
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
               {renderIcon(item)}
             </div>
 
-            <span className="capitalize">
+            <span className="capitalize leading-tight text-muted-foreground">
               {item.replaceAll("_", " ")}
             </span>
           </div>
@@ -87,283 +44,85 @@ function FeatureGrid({
   );
 }
 
-function DetailsSection({ property }: any) {
-  const propertyTypes = [
-    ...buyType,
-    ...rentType,
-    ...leaseType,
+export default function DetailsSection({ property }: any) {
+  const categories = [
+    {
+      title: "Essentials",
+      items: property?.essentials ?? [],
+    },
+    {
+      title: "Outdoor",
+      items: property?.outdoor ?? [],
+    },
+    {
+      title: "Lifestyle",
+      items: property?.lifestyle ?? [],
+    },
+    {
+      title: "Wellness",
+      items: property?.wellness ?? [],
+    },
+    {
+      title: "Amenities",
+      items: property?.amenities ?? [],
+    },
+    {
+      title: "Internet Speed",
+      items: property?.internet_speed ?? [],
+    },
   ];
 
-  const propertyType =
-    propertyTypes.find(
-      (item) => item.value === property.propertyType
-    )?.label || property.propertyType;
+  const sections: { title: string; items: string[] }[] = [];
+  const moreFeatures: string[] = [];
 
-  const bhk =
-    bhkOptions.find((item) => item.value === property.bhk)?.label ||
-    property.bhk;
+  // Keep large categories separate
+  // Merge small categories into "More Features"
+  categories.forEach((category) => {
+    if (!category.items.length) return;
 
-  const areaUnit =
-    areaUnits.find((item) => item.value === property.areaUnit)?.value ||
-    property.areaUnit;
+    if (category.items.length < 3) {
+      moreFeatures.push(...category.items);
+    } else {
+      sections.push(category);
+    }
+  });
 
-  const furnished =
-    furnishedStatuses.find(
-      (item) => item.value === property.furnishedStatus
-    )?.label || property.furnishedStatus;
+  // Add merged card if needed
+  if (moreFeatures.length) {
+    sections.push({
+      title: "More Features",
+      items: moreFeatures,
+    });
+  }
+
+  // Rental Conditions is always separate
+  if (property?.rental_conditions?.length) {
+    sections.push({
+      title: "Rental Conditions",
+      items: property.rental_conditions,
+    });
+  }
 
   return (
-    <div className="space-y-8">
+    <Card>
+      <CardHeader className="pb-4">
+        <CardTitle className="flex items-center gap-2 text-primary">
+          <ShieldCheck className="h-5 w-5" />
+          Features & Amenities
+        </CardTitle>
+      </CardHeader>
 
-
-
-            {/* ================================================= */}
-      {/* FEATURES & AMENITIES                              */}
-      {/* ================================================= */}
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5" />
-            Features & Amenities
-          </CardTitle>
-        </CardHeader>
-
-        <CardContent className="space-y-8">
-
-          <FeatureGrid
-            title="Essentials"
-            items={property.essentials}
-          />
-
-          <FeatureGrid
-            title="Outdoor"
-            items={property.outdoor}
-          />
-
-          <FeatureGrid
-            title="Wellness"
-            items={property.wellness}
-          />
-
-          <FeatureGrid
-            title="Lifestyle"
-            items={property.lifestyle}
-          />
-
-          <FeatureGrid
-            title="Amenities"
-            items={property.amenities}
-          />
-
-          <FeatureGrid
-            title="Rental Conditions"
-            items={property.rental_conditions}
-          />
-
-          <FeatureGrid
-            title="Internet Speed"
-            items={property.internet_speed}
-          />
-
-        </CardContent>
-      </Card>
-
-      {/* ================================================= */}
-      {/* PROPERTY INFORMATION                              */}
-      {/* ================================================= */}
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Home className="w-5 h-5" />
-            Property Information
-          </CardTitle>
-        </CardHeader>
-
-        <CardContent className="space-y-4">
-
-          <DetailRow
-            label="Property Type"
-            value={propertyType}
-          />
-
-          <DetailRow
-            label="Bedrooms"
-            value={bhk}
-          />
-
-          <DetailRow
-            label="Bathrooms"
-            value={property.bathrooms}
-          />
-
-          <DetailRow
-            label="Area"
-            value={`${property.area} ${areaUnit}`}
-          />
-
-          <DetailRow
-            label="Carpet Area"
-            value={
-              property.carpetArea
-                ? `${property.carpetArea} ${areaUnit}`
-                : null
-            }
-          />
-
-          <DetailRow
-            label="Furnished"
-            value={furnished}
-          />
-
-
-          <DetailRow
-            label="Facing"
-            value={property.facing}
-          />
-
-          <DetailRow
-            label="Balcony Side"
-            value={property.balconySide}
-          />
-
-          <DetailRow
-            label="Parking"
-            value={property.parkingNumber}
-          />
-
-          <DetailRow
-            label="Indoor Parking"
-            value={property.indoorParkingCount}
-          />
-
-          <DetailRow
-            label="Outdoor Parking"
-            value={property.outdoorParkingCount}
-          />
-
-          <DetailRow
-            label="Balconies"
-            value={property.balconyCount}
-          />
-
-          <DetailRow
-            label="Servant Rooms"
-            value={property.servantRoomCount}
-          />
-
-          <DetailRow
-            label="Property Age"
-            value={
-              property.propertyAge > 0
-                ? `${property.propertyAge} Years`
-                : "New"
-            }
-          />
-
-          <DetailRow
-            label="Available From"
-            value={
-              property.availableFrom
-                ? new Date(
-                    property.availableFrom
-                  ).toLocaleDateString()
-                : null
-            }
-          />
-
-          <DetailRow
-            label="Tenant Visit"
-            value={
-              property.possibleTenantVisit
-                ? new Date(
-                    property.possibleTenantVisit
-                  ).toLocaleDateString()
-                : null
-            }
-          />
-
-        </CardContent>
-      </Card>
-
-
-            {/* ================================================= */}
-      {/* LOCATION */}
-      {/* ================================================= */}
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <MapPin className="w-5 h-5" />
-            Location Information
-          </CardTitle>
-        </CardHeader>
-
-        <CardContent className="space-y-4">
-
-          <DetailRow
-            label="Province"
-            value={property.locationId?.province}
-          />
-
-          <DetailRow
-            label="District"
-            value={property.locationId?.district}
-          />
-
-          <DetailRow
-            label="Area"
-            value={property.locationId?.area}
-          />
-
-          <DetailRow
-            label="Postal Codes"
-            value={property.locationId?.postalCodes?.join(", ")}
-          />
-
-
-        </CardContent>
-      </Card>
-
-      {/* ================================================= */}
-      {/* ADDITIONAL HIGHLIGHTS */}
-      {/* ================================================= */}
-
-      {property.additionalHighlights?.length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5" />
-              Additional Highlights
-            </CardTitle>
-          </CardHeader>
-
-          <CardContent>
-            <div className="grid md:grid-cols-2 gap-3">
-              {property.additionalHighlights.map(
-                (item: string, index: number) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-3 rounded-lg border p-3"
-                  >
-                    <div className="text-primary">
-                      {renderIcon(item)}
-                    </div>
-
-                    <span className="capitalize">
-                      {item.replaceAll("_", " ")}
-                    </span>
-                  </div>
-                )
-              )}
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-    </div>
+      <CardContent>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {sections.map((section) => (
+            <FeatureGrid
+              key={section.title}
+              title={section.title}
+              items={section.items}
+            />
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 }
-
-export default DetailsSection;
