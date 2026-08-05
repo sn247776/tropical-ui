@@ -244,7 +244,7 @@ function LocationPropertyInfo({ property }: any) {
       {/* ================================================= */}
 
       {property.additionalHighlights?.length > 0 && (
-        <Card>
+        <Card className='mt-8'>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Sparkles className="w-5 h-5" />
