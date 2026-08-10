@@ -25,7 +25,7 @@ export function VisitButton({ id,className }: VisitButtonProps) {
   };
 
   return (
-    <Button variant={isAdded ? 'destructive' : 'outline' } onClick={handleClick} className={cn("className w-[120px] flex justify-between", className)}>
+    <Button variant={isAdded ? 'destructive' : 'outline' } onClick={handleClick} className={cn("className w-[120px] flex  gap-2", className)}>
       {isAdded ? (
         <>
           <CalendarMinus className="h-4 w-4" />

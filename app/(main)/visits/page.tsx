@@ -22,7 +22,7 @@ export default async function VisitPage() {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto px-4">
       <h1 className="text-3xl font-bold my-8">All Visits</h1>
 
       <VisitList properties={properties} />
