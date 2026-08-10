@@ -14,8 +14,6 @@ export function VisitButton({ id,className }: VisitButtonProps) {
   const { visitIds, addVisit, removeVisit } = useVisitStore();
   const isAdded = visitIds.includes(id);
 
-  console.log(visitIds,"Here is the list")
-
   const handleClick = () => {
     if (isAdded) {
       removeVisit(id);

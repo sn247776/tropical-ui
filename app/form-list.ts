@@ -205,3 +205,19 @@ export const additionalAmenities = [
   { value: "security", label: "24/7 Security" },
   { value: "gated_community", label: "Gated Community" },
 ];
+
+
+export const timeSlots = [
+  { label: "9AM Morning", value: "9" },
+  { label: "10AM Morning", value: "10" },
+  { label: "11AM Morning", value: "11" },
+  { label: "12PM Afternoon", value: "12" },
+  { label: "1PM Afternoon", value: "13" },
+  { label: "2PM Afternoon", value: "14" },
+  { label: "3PM Afternoon", value: "15" },
+  { label: "4PM Evening", value: "16" },
+  { label: "5PM Evening", value: "17" },
+  { label: "6PM Evening", value: "18" },
+  { label: "7PM Evening", value: "19" },
+  { label: "8PM Evening", value: "20" },
+];

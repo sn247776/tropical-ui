@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import VisitList from "./visit-list";
 import { baseURL } from "@/app/api/api";
-import { Button } from "@/components/ui/button";
+import BookVisits from "./forms/book-visit";
 
 export default async function VisitPage() {
   const cookieStore = await cookies();
@@ -28,7 +28,7 @@ export default async function VisitPage() {
       <VisitList properties={properties} />
 
             <div className="my-default">
-       <Button disabled className="w-full"> Book Visit</Button>
+       <BookVisits disabled={codes.length === 0}/>
       </div>
     </div>
   );

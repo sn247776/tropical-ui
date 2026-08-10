@@ -27,7 +27,7 @@ function MobNav() {
         <SheetTrigger>
           <Menu />
         </SheetTrigger>
-        <SheetContent className="w-[300px]">
+        <SheetContent className="w-[300px] p-4">
           <div className="flex flex-col gap-default">
             <Link href={"/"} >
               <img
