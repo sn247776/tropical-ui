@@ -382,7 +382,7 @@ export default function BookedVisits({
             <div className="space-y-3 p-4">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-semibold">
-                  Properties
+                  Spaces
                 </h3>
 
                 <span className="text-xs text-muted-foreground">

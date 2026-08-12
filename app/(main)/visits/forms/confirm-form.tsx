@@ -23,7 +23,7 @@ import { useVisitStore } from "@/stores/visit-store";
 import { toast } from "sonner";
 import { RotateCcw } from "lucide-react";
 import { bookVisitAction } from "@/app/actions/visits";
-
+import { useRouter } from "next/navigation";
 
 
 const ConfirmFormSchema = yup.object({
@@ -51,6 +51,7 @@ interface ConfirmFormProps {
 export function ConfirmForm({
   setOpen,
 }: ConfirmFormProps) {
+  const router = useRouter();
   const {
     visitIds,
     clearAllVisits,
@@ -97,7 +98,7 @@ const onSubmit = async (data: ConfirmFormData) => {
 
     clearAllVisits();
     setOpen(false);
-
+router.refresh();
     toast.success("Visit booked successfully!");
   } catch (error: any) {
     console.error(error);
