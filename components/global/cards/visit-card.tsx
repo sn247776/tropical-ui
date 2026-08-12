@@ -1,13 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { MapPin, Ruler, Sofa } from "lucide-react";
+import {
+  Home,
+  MapPin,
+  Ruler,
+  Sofa,
+} from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 import { VisitButton } from "../buttons/visit-button";
 import CurrencyProvider from "../currency-provider";
+import { bhkOptions } from "@/app/form-list";
 
 interface VisitCardProps {
   property: any;
@@ -18,22 +24,52 @@ function VisitCard({ property }: VisitCardProps) {
     name,
     location,
     area,
+    areaUnit,
     price,
     pricing,
     isAvailable,
     status,
     images,
-    furnished,
+    furnishedStatus,
     slug,
     listingType,
     propertyCode,
+    propertyType,
+    bhk,
   } = property;
-
-  const imageUrl = images?.[0]?.url || "/placeholder.svg";
 
   /*
    * --------------------------------------------------
-   * Location
+   * IMAGE
+   * --------------------------------------------------
+   */
+
+  const imageUrl =
+    images?.[0]?.url ||
+    images?.[0] ||
+    "/placeholder.svg";
+
+  /*
+   * --------------------------------------------------
+   * LISTING TYPE
+   * --------------------------------------------------
+   */
+
+  const normalizedListingType =
+    listingType?.toLowerCase();
+
+  const listingLabel =
+    normalizedListingType === "rent"
+      ? "For Rent"
+      : normalizedListingType === "buy"
+        ? "For Sale"
+        : normalizedListingType === "lease"
+          ? "For Lease"
+          : listingType;
+
+  /*
+   * --------------------------------------------------
+   * LOCATION
    * --------------------------------------------------
    */
 
@@ -47,24 +83,7 @@ function VisitCard({ property }: VisitCardProps) {
 
   /*
    * --------------------------------------------------
-   * Listing Type
-   * --------------------------------------------------
-   */
-
-  const normalizedListingType = listingType?.toLowerCase();
-
-  const listingLabel =
-    normalizedListingType === "rent"
-      ? "For Rent"
-      : normalizedListingType === "buy"
-        ? "For Sale"
-        : normalizedListingType === "lease"
-          ? "For Lease"
-          : listingType;
-
-  /*
-   * --------------------------------------------------
-   * Price
+   * PRICE
    * --------------------------------------------------
    */
 
@@ -74,8 +93,7 @@ function VisitCard({ property }: VisitCardProps) {
   if (normalizedListingType === "rent") {
     const monthly =
       pricing?.rent?.monthlyRate ??
-      pricing?.rent?.monthly ??
-      pricing?.monthlyRent;
+      pricing?.rent?.monthly;
 
     const weekly =
       pricing?.rent?.weeklyRate ??
@@ -114,13 +132,13 @@ function VisitCard({ property }: VisitCardProps) {
       price;
 
     if (pricing?.lease?.durationYears) {
-      priceSuffix = ` / ${pricing.lease.durationYears} years`;
+      priceSuffix = `/ ${pricing.lease.durationYears} years`;
     }
   }
 
   /*
    * --------------------------------------------------
-   * Availability
+   * AVAILABILITY
    * --------------------------------------------------
    */
 
@@ -131,18 +149,46 @@ function VisitCard({ property }: VisitCardProps) {
         ? status.toLowerCase() === "available"
         : true;
 
+  /*
+   * --------------------------------------------------
+   * PROPERTY TYPE
+   * --------------------------------------------------
+   */
+
+  const propertyTypeLabel = propertyType
+    ? propertyType
+        .replace(/[-_]/g, " ")
+        .replace(/\b\w/g, (char: string) =>
+          char.toUpperCase()
+        )
+    : null;
+
+  /*
+   * --------------------------------------------------
+   * RENDER
+   * --------------------------------------------------
+   */
+
+  const getBHKLabel = (value: string) => {
+    return (
+      bhkOptions.find((slot) => slot.value === String(value))
+        ?.label || value
+    );
+  };
+
   return (
-    <div className="overflow-hidden rounded-sm border">
+    <div className="overflow-hidden rounded-xl border bg-card">
       <div className="flex flex-col md:flex-row">
+
         {/* ==========================================
             IMAGE
         ========================================== */}
 
-        <div className="relative md:w-1/3 h-[200px] w-full shrink-0 md:h-auto md:w-64">
+    <div className="relative md:w-1/3 h-[200px] w-full shrink-0 md:h-auto md:w-64">
           <img
             src={imageUrl}
             alt={name || "Property"}
-            className="w-full  h-[200px] object-cover"
+            className="w-full  h-[250px] object-cover"
         
           />
 
@@ -171,18 +217,38 @@ function VisitCard({ property }: VisitCardProps) {
         ========================================== */}
 
         <div className="flex min-w-0 flex-1 flex-col p-5">
-          {/* Name */}
 
-          <div className="mb-2">
-            <h3 className="line-clamp-1 text-lg font-semibold text-primary">
-              {name}
-            </h3>
+          {/* NAME + CODE */}
+
+          <div className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+
+              <h3 className="line-clamp-2 text-lg font-semibold text-primary">
+                {name}
+              </h3>
+
+              {propertyCode && (
+                <p className="mt-1 text-xs text-muted-foreground">
+                  Property Code: {propertyCode}
+                </p>
+              )}
+
+            </div>
+
+            {propertyTypeLabel && (
+              <Badge
+                variant="secondary"
+                className="shrink-0 capitalize"
+              >
+                {propertyTypeLabel}
+              </Badge>
+            )}
           </div>
 
-          {/* Location */}
+          {/* LOCATION */}
 
           {locationText && (
-            <div className="mb-4 flex items-start gap-1.5 text-sm text-muted-foreground">
+            <div className="mt-3 flex items-start gap-1.5 text-sm text-muted-foreground">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
 
               <span className="line-clamp-2">
@@ -192,21 +258,45 @@ function VisitCard({ property }: VisitCardProps) {
           )}
 
           {/* ========================================
-              PROPERTY INFO
+              PROPERTY INFORMATION
           ======================================== */}
 
-          <div className="mb-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+          <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm text-muted-foreground">
+
+            {/* AREA */}
+
             {area && (
               <div className="flex items-center gap-1.5">
                 <Ruler className="h-4 w-4 text-primary" />
-                <span>{area} sq.ft</span>
+
+                <span>
+                  {area} {areaUnit || "sq.m"}
+                </span>
               </div>
             )}
 
-            {furnished && (
+            {/* BHK */}
+
+            {bhk && (
+              <div className="flex items-center gap-1.5">
+                <Home className="h-4 w-4 text-primary" />
+
+                <span>{getBHKLabel(bhk)}</span>
+              </div>
+            )}
+
+            {/* FURNISHED */}
+
+            {furnishedStatus && (
               <div className="flex items-center gap-1.5">
                 <Sofa className="h-4 w-4 text-primary" />
-                <span>{furnished}</span>
+
+                <span className="capitalize">
+                  {furnishedStatus.replace(
+                    /[-_]/g,
+                    " "
+                  )}
+                </span>
               </div>
             )}
           </div>
@@ -216,15 +306,19 @@ function VisitCard({ property }: VisitCardProps) {
           ======================================== */}
 
           {displayPrice && (
-            <div className="mb-5">
+            <div className="mt-5">
               <div className="flex items-baseline gap-1.5">
-                <CurrencyProvider price={displayPrice} />
+
+                <CurrencyProvider
+                  price={displayPrice}
+                />
 
                 {priceSuffix && (
                   <span className="text-sm text-muted-foreground">
                     {priceSuffix}
                   </span>
                 )}
+
               </div>
             </div>
           )}
@@ -233,18 +327,26 @@ function VisitCard({ property }: VisitCardProps) {
               ACTIONS
           ======================================== */}
 
-          <div className="mt-auto flex flex-wrap items-center gap-2">
-            <Button asChild>
-              <Link
-                href={`/spaces/${normalizedListingType}/${slug}`}
-              >
-                View Details
-              </Link>
-            </Button>
+          <div className="mt-auto flex flex-wrap items-center gap-2 pt-5">
+
+            {/* VIEW DETAILS */}
+
+            {slug && (
+              <Button asChild>
+                <Link
+                  href={`/spaces/${normalizedListingType}/${slug}`}
+                >
+                  View Details
+                </Link>
+              </Button>
+            )}
+
+            {/* VISIT */}
 
             {propertyCode && (
               <VisitButton id={propertyCode} />
             )}
+
           </div>
         </div>
       </div>

@@ -46,9 +46,7 @@ const Navbar = () => {
             Visits
           </Button>
           </Link>
-          <Button  asChild className="hidden lg:flex">
-            <Link href="/spaces">Browse Spaces</Link>
-          </Button>
+
           <MobNav/>
         </div>
       </div>

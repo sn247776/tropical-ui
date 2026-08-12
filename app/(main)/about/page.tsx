@@ -56,7 +56,7 @@ export default function AboutPage() {
               properties. Through innovation and exceptional service, we empower
               buyers, sellers, and brokers with a streamlined, reliable journey.
             </p>
-            <div className="flex justify-center"><Link href={'/spaces'}> <Button className="w-fit mt-items">Browse Spaces</Button></Link></div>
+           
           </div>
         </div>
 
