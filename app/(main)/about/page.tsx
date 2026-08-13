@@ -55,10 +55,6 @@ export default function AboutPage() {
                 Who We Are
               </span>
 
-              <h1 className="mt-3">
-                About Tropical Roots Realty
-              </h1>
-
               <h2 className="mt-3 text-xl md:text-2xl font-medium text-primary">
                 Professional property services, rooted in Koh Phangan.
               </h2>
@@ -69,9 +65,7 @@ export default function AboutPage() {
                 Tropical Roots Realty was created with a simple approach:
                 provide efficient, professional and fairly priced property
                 services while building relationships that last.
-              </p>
-
-              <p>
+         
                 We work with property owners, buyers, tenants and investors
                 across Koh Phangan, helping with property sales, rentals and
                 investment opportunities.
@@ -83,13 +77,9 @@ export default function AboutPage() {
                 presentation. We actively promote our listings to reach the
                 right buyers, tenants and investors, both locally and
                 internationally.
-              </p>
-
-              <p>
+     
                 But our relationship doesn&apos;t end with a transaction.
-              </p>
-
-              <p>
+      
                 We also provide property maintenance and construction support,
                 helping owners look after, improve and develop their properties
                 with reliable local assistance.

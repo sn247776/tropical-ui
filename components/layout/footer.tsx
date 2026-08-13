@@ -14,7 +14,7 @@ export default function Footer() {
         <div>
           <h2 className="text-primary text-2xl font-semibold">About</h2>
           <p className="my-middel text-primary/70 ">
-            {basicInfo?.name} is a comprehensive real estate management platform based in Thiland, offering tech driven solutions for leasing, selling, and managing properties from possession to post-sale.
+          Your trusted Koh Phangan property website, connecting buyers, sellers, tenants and investors with carefully presented properties and reliable local services.
           </p>
 
           <div className="flex gap-items">
