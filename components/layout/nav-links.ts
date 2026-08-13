@@ -13,10 +13,6 @@ export const quickLinks = [
   },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact Us" },
-    {
-    label: "List Space",
-    href: "/profile/spaces",
-  },
   {
     label: "Privacy Policy",
     href: "/privacy-policy",
