@@ -11,11 +11,10 @@ export const quickLinks = [
     label: "FAQ",
     href: "/faq",
   },
+ 
   { href: "/about", label: "About" },
+  
   { href: "/contact", label: "Contact Us" },
-  {
-    label: "Privacy Policy",
-    href: "/privacy-policy",
-  },
+   { href: "/services", label: "Our Services" },
 
 ];
