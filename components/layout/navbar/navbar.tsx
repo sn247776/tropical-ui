@@ -29,7 +29,7 @@ const Navbar = () => {
             <Link
               key={href}
               href={href}
-              className={`text-sm uppercase font-semibold hover:text-primary ${
+              className={`text-sm uppercase font-bold hover:text-primary ${
                 isActive(href) ? 'text-primary' : 'text-foreground'
               }`}
             >

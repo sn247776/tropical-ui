@@ -1,15 +1,14 @@
 import { Suspense } from "react";
-
 import ViewType from "@/components/global/view-type";
-import PropertyFilter from "./sections/property-filter";
-import PropertyListing from "./sections/property-listing";
 import Pagination from "@/components/global/pagination";
-import MobFilters from "./sections/mob-filter";
+import MobFilters from "../sections/mob-filter";
+import PropertyFilter from "../sections/property-filter";
+import PropertyListing from "../sections/property-listing";
+import { fetchLeaseList } from "@/app/api/listing-info";
 
 type SearchParams = Promise<{
   page?: string;
   bhk?: string;
-  listingType?: string;
   location?: string;
   minPrice?: string;
   maxPrice?: string;
@@ -19,7 +18,7 @@ type SearchParams = Promise<{
   sortOrder?: string;
 }>;
 
-export default async function PropertiesPage({
+export default async function RentPage({
   searchParams,
 }: {
   searchParams: SearchParams;
@@ -29,7 +28,6 @@ export default async function PropertiesPage({
   const currentPage = Number(params.page || "1");
 
   const bhk = params.bhk || "";
-  const listingType = params.listingType || "";
   const location = params.location || "";
   const minPrice = params.minPrice || "";
   const maxPrice = params.maxPrice || "";
@@ -39,21 +37,19 @@ export default async function PropertiesPage({
   const sortBy = "price";
   const sortOrder = params.sortOrder || "desc";
 
-  // const properties = await fetchPropertiesList({
-  //   page: currentPage,
-  //   bhk,
-  //   listingType,
-  //   location,
-  //   minPrice,
-  //   maxPrice,
-  //   propertyType,
-  //   furnishedStatus,
-  //   floorNumber,
-  //   sortBy,
-  //   sortOrder,
-  // });
+  const properties = await fetchLeaseList({
+    page: currentPage,
+    bhk,
+    location,
+    minPrice,
+    maxPrice,
+    propertyType,
+    furnishedStatus,
+    floorNumber,
+    sortBy,
+    sortOrder,
+  });
 
-  const properties:any = [];
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -63,13 +59,13 @@ export default async function PropertiesPage({
         </h1>
 
         <Suspense fallback={null}>
-          <MobFilters />
+          <MobFilters listingType="lease" />
         </Suspense>
       </div>
 
       <div className="flex items-center justify-between mb-6">
         <p className="text-gray-600">
-          {properties?.pagination?.total || 0} properties found
+          {properties?.total || 0} properties found
         </p>
 
         <Suspense fallback={null}>
@@ -80,21 +76,19 @@ export default async function PropertiesPage({
       <div className="flex flex-col gap-6 md:flex-row">
         <div className="hidden w-full md:block md:w-1/4">
           <Suspense fallback={null}>
-            <PropertyFilter />
+            <PropertyFilter listingType="lease" />
           </Suspense>
         </div>
 
         <PropertyListing
-          properties={properties?.inventory}
-          totalCount={properties?.pagination?.total || 0}
-          currentPage={currentPage}
+          properties={properties?.data}
         />
       </div>
 
       <div className="my-8">
         <Suspense fallback={null}>
           <Pagination
-            totalPage={properties?.pagination?.pages}
+            totalPage={properties?.totalPages}
           />
         </Suspense>
       </div>

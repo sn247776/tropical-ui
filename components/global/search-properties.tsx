@@ -1,88 +1,239 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Search } from 'lucide-react';
+import React from "react";
+import { useRouter } from "next/navigation";
+import {
+  Search,
+  MapPin,
+} from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
+} from "@/components/ui/select";
 
 import {
   listingTypes,
-  allPriceRanges,
-  rentPriceRanges,
-  buyPriceRanges,
-} from '@/stores/data-list';
-import { LocationCitySelect } from './location-selector/city-select';
-import { LocationAreaSelect } from './location-selector/area-select';
+  thbAllPriceRanges,
+  thbRentPriceRanges,
+  thbBuyPriceRanges,
+  thbLeasePriceRanges,
+} from "@/stores/data-list";
 
+interface Location {
+  _id: string;
+  province: string;
+  district: string;
+  area: string;
+  postalCodes: string[];
+  isActive: boolean;
+}
 
-const SearchProperties = () => {
+interface SearchPropertiesClientProps {
+  locations: Location[];
+}
+
+export default function SearchPropertiesClient({
+  locations,
+}: SearchPropertiesClientProps) {
   const router = useRouter();
-  const [listingType, setListingType] = useState('');
-  const [priceRange, setPriceRange] = useState('');
 
-    const [city, setCity] = React.useState("")
-  const [areas, setAreas] = React.useState<string[]>([])
+  const [listingType, setListingType] =
+    React.useState("");
 
-  const handleCityChange = (newCity: string) => {
-    setCity(newCity)
+  const [priceRange, setPriceRange] =
+    React.useState("");
 
-    setAreas([])
-  }
+  const [district, setDistrict] =
+    React.useState("");
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+  const [area, setArea] =
+    React.useState("");
 
-    const params = new URLSearchParams();
-    
-    
-    if (listingType) params.append('listingType', listingType);
+  /**
+   * Get unique districts from location API
+   */
+  const districts = React.useMemo(() => {
+    return Array.from(
+      new Set(
+        locations
+          .filter((location) => location.isActive)
+          .map((location) => location.district)
+          .filter(Boolean)
+      )
+    ).sort();
+  }, [locations]);
 
-    if (priceRange) {
-      const [minPrice, maxPrice] = priceRange.split('-');
-      params.append('minPrice', minPrice);
-      if (maxPrice) params.append('maxPrice', maxPrice);
+  /**
+   * Areas belonging to selected district
+   */
+  const areas = React.useMemo(() => {
+    if (!district) {
+      return [];
     }
 
-    router.push(`/spaces?${params.toString()}`);
+    return Array.from(
+      new Set(
+        locations
+          .filter(
+            (location) =>
+              location.isActive &&
+              location.district === district
+          )
+          .map((location) => location.area)
+          .filter(Boolean)
+      )
+    ).sort();
+  }, [locations, district]);
+
+  /**
+   * When district changes,
+   * clear previously selected area.
+   */
+  const handleDistrictChange = (value: string) => {
+    setDistrict(value);
+    setArea("");
   };
 
-  const handleListingTypeChange = (value: string) => {
-    setListingType(value);
-    setPriceRange('');
-  };
-
+  /**
+   * Listing type controls price ranges.
+   */
   const getPriceOptions = () => {
-    if (!listingType) return allPriceRanges;
-    if (listingType === 'rent') return rentPriceRanges;
-    if (listingType === 'buy') return buyPriceRanges;
-    return allPriceRanges;
+    switch (listingType) {
+      case "rent":
+        return thbRentPriceRanges;
+
+      case "buy":
+        return thbBuyPriceRanges;
+
+      case "lease":
+        return thbLeasePriceRanges;
+
+      default:
+        return thbAllPriceRanges;
+    }
+  };
+
+  /**
+   * Change listing type
+   */
+  const handleListingTypeChange = (
+    value: string
+  ) => {
+    setListingType(value);
+    setPriceRange("");
+  };
+
+  /**
+   * Search
+   */
+  const handleSearch = (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
+
+    /**
+     * If no listing type is selected,
+     * we don't know which page to redirect to.
+     */
+    if (!listingType) {
+      return;
+    }
+
+    const params = new URLSearchParams();
+
+    /**
+     * Price
+     */
+    if (
+      priceRange &&
+      priceRange !== "all"
+    ) {
+      const [
+        minPrice,
+        maxPrice,
+      ] = priceRange.split("-");
+
+      if (minPrice) {
+        params.set("minPrice", minPrice);
+      }
+
+      if (maxPrice) {
+        params.set("maxPrice", maxPrice);
+      }
+    }
+
+    /**
+     * District
+     */
+    if (district) {
+      params.set(
+        "district",
+        district
+      );
+    }
+
+    /**
+     * Area
+     */
+    if (area) {
+      params.set(
+        "area",
+        area
+      );
+    }
+
+    /**
+     * Listing type determines page.
+     *
+     * rent  -> /rent
+     * buy   -> /buy
+     * lease -> /lease
+     */
+    router.push(
+      `/${listingType}?${params.toString()}`
+    );
   };
 
   return (
-    <div className="w-full mx-auto bg-white rounded-lg shadow-lg p-6">
+    <div className="mx-auto w-full rounded-lg bg-white p-6 shadow-lg">
       <form
         onSubmit={handleSearch}
-        className="grid grid-cols-1 md:grid-cols-5 gap-4"
+        className="grid grid-cols-1 gap-4 md:grid-cols-5"
       >
-        {/* Listing Type Select */}
-        <div className="col-span-1">
-          <label htmlFor="listingType" className="text-sm text-gray-500 mb-1 block">
+        {/* Listing Type */}
+        <div>
+          <label
+            htmlFor="listingType"
+            className="mb-1 block text-sm text-gray-500"
+          >
             Listing Type
           </label>
-          <Select value={listingType} onValueChange={handleListingTypeChange}>
-            <SelectTrigger id="listingType" className="w-full">
+
+          <Select
+            value={listingType}
+            onValueChange={
+              handleListingTypeChange
+            }
+          >
+            <SelectTrigger
+              id="listingType"
+              className="w-full"
+            >
               <SelectValue placeholder="Select Type" />
             </SelectTrigger>
+
             <SelectContent>
               {listingTypes.map((type) => (
-                <SelectItem key={type.value} value={type.value}>
+                <SelectItem
+                  key={type.value}
+                  value={type.value}
+                >
                   {type.label}
                 </SelectItem>
               ))}
@@ -90,65 +241,140 @@ const SearchProperties = () => {
           </Select>
         </div>
 
-        {/* Budget Select */}
-        <div className="col-span-1">
-          <label htmlFor="priceRange" className="text-sm text-gray-500 mb-1 block">
-            Budget
+        {/* Budget */}
+        <div>
+          <label
+            htmlFor="priceRange"
+            className="mb-1 flex items-center gap-1 text-sm text-gray-500"
+          >
+        
+
+           ฿ Budget
           </label>
+
           <Select
             value={priceRange}
             onValueChange={setPriceRange}
             disabled={!listingType}
           >
-            <SelectTrigger id="priceRange" className="w-full">
+            <SelectTrigger
+              id="priceRange"
+              className="w-full"
+            >
               <SelectValue placeholder="Select Budget" />
             </SelectTrigger>
+
             <SelectContent>
-              {getPriceOptions().map((range) => (
-                <SelectItem key={range.value} value={range.value}>
-                  {range.label}
-                </SelectItem>
-              ))}
+              {getPriceOptions().map(
+                (range) => (
+                  <SelectItem
+                    key={range.value}
+                    value={range.value}
+                  >
+                    {range.label}
+                  </SelectItem>
+                )
+              )}
             </SelectContent>
           </Select>
         </div>
 
+        {/* District */}
+        <div>
+          <label
+            htmlFor="district"
+            className="mb-1 flex items-center gap-1 text-sm text-gray-500"
+          >
+            <MapPin className="h-4 w-4" />
 
-
-        {/* Location Select */}
-        <div className="col-span-1">
-          <label htmlFor="location" className="text-sm text-gray-500 mb-1 block">
-            Location(s)
+            District
           </label>
-                <LocationCitySelect
-        value={city}
-        setValue={handleCityChange}
-      />
 
+          <Select
+            value={district}
+            onValueChange={
+              handleDistrictChange
+            }
+          >
+            <SelectTrigger
+              id="district"
+              className="w-full"
+            >
+              <SelectValue placeholder="Select District" />
+            </SelectTrigger>
+
+            <SelectContent>
+              {districts.map(
+                (districtName) => (
+                  <SelectItem
+                    key={districtName}
+                    value={districtName}
+                  >
+                    {districtName}
+                  </SelectItem>
+                )
+              )}
+            </SelectContent>
+          </Select>
         </div>
 
-                <div className="col-span-1">
-          <label htmlFor="Area" className="text-sm text-gray-500 mb-1 block">
+        {/* Area */}
+        <div>
+          <label
+            htmlFor="area"
+            className="mb-1 flex items-center gap-1 text-sm text-gray-500"
+          >
+            <MapPin className="h-4 w-4" />
+
             Area
           </label>
 
-      <LocationAreaSelect
-        city={city}
-        value={areas}
-        setValue={setAreas}
-      />
+          <Select
+            value={area}
+            onValueChange={setArea}
+            disabled={!district}
+          >
+            <SelectTrigger
+              id="area"
+              className="w-full"
+            >
+              <SelectValue
+                placeholder={
+                  district
+                    ? "Select Area"
+                    : "Select District First"
+                }
+              />
+            </SelectTrigger>
+
+            <SelectContent>
+              {areas.map(
+                (areaName) => (
+                  <SelectItem
+                    key={areaName}
+                    value={areaName}
+                  >
+                    {areaName}
+                  </SelectItem>
+                )
+              )}
+            </SelectContent>
+          </Select>
         </div>
 
-        {/* Search Button */}
-        <div className="col-span-1 flex items-end">
-          <Button className="w-full" type="submit">
+        {/* Search */}
+        <div className="flex items-end">
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={!listingType}
+          >
             <Search className="mr-2 h-4 w-4" />
+
             Search
           </Button>
         </div>
       </form>
     </div>
   );
-};
-
-export default SearchProperties;
+}

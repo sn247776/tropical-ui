@@ -1,18 +1,61 @@
-export const propertyTypes = [
-  { label: "All Types", value: "all" },
-  { label: "Apartment", value: "apartment" },
-  { label: "Flat", value: "flat" },
-  { label: "Floor", value: "floor" },
-  { label: "Plot", value: "plot" },
-  { label: "Commercial", value: "commercial" },
+import { 
+  FaBuilding, 
+  FaHome, 
+  FaLayerGroup, 
+  FaHotel, 
+  FaHouseUser, 
+  FaTree,
+  FaMapMarkedAlt,
+  FaBed,
+  FaSwimmingPool,
+  FaUmbrellaBeach,
+  FaLeaf,
+  FaCampground
+} from 'react-icons/fa';
+import { GiHouse } from 'react-icons/gi';
+
+export const buyType = [
+  { value: "studio", label: "Studio", icon: FaBed },
+  { value: "apartment", label: "Apartment", icon: FaBuilding },
+  { value: "condo", label: "Condo", icon: FaBuilding },
+  { value: "penthouse", label: "Penthouse", icon: FaHotel },
+  { value: "duplex", label: "Duplex", icon: FaLayerGroup },
+
+  { value: "house", label: "House", icon: GiHouse },
+  { value: "villa", label: "Villa", icon: FaHouseUser },
+  { value: "pool villa", label: "Pool Villa", icon: FaSwimmingPool },
+  { value: "beach house", label: "Beach House", icon: FaUmbrellaBeach },
+  { value: "jungle house", label: "Jungle House", icon: FaTree },
+  { value: "bamboo house", label: "Bamboo House", icon: FaLeaf },
+  { value: "tiny house", label: "Tiny House", icon: FaHome },
+  { value: "bungalow", label: "Bungalow", icon: FaCampground },
+
+  { value: "land", label: "Land", icon: FaMapMarkedAlt },
 ];
 
-export const listingTypes = [
-  { label: "All Listing Types", value: "all" },
-  { label: "Buy", value: "buy" },
-  { label: "Rent", value: "rent" },
-    { label: " Daily Rental", value: "day" },
+
+export const rentType = [
+  { value: "studio", label: "Studio", icon: FaBed },
+  { value: "apartment", label: "Apartment", icon: FaBuilding },
+  { value: "condo", label: "Condo", icon: FaBuilding },
+  { value: "penthouse", label: "Penthouse", icon: FaHotel },
+  { value: "duplex", label: "Duplex", icon: FaLayerGroup },
+
+  { value: "house", label: "House", icon: GiHouse },
+  { value: "villa", label: "Villa", icon: FaHouseUser },
+  { value: "pool villa", label: "Pool Villa", icon: FaSwimmingPool },
+  { value: "beach house", label: "Beach House", icon: FaUmbrellaBeach },
+  { value: "jungle house", label: "Jungle House", icon: FaTree },
+  { value: "bamboo house", label: "Bamboo House", icon: FaLeaf },
+  { value: "tiny house", label: "Tiny House", icon: FaHome },
+  { value: "bungalow", label: "Bungalow", icon: FaCampground },
 ];
+
+export const leaseType = [
+  { value: "land", label: "Land", icon: FaMapMarkedAlt },
+];
+
+
 
 export const furnishedStatus = [
   { label: "All Types", value: "all" },
@@ -61,71 +104,95 @@ export const buyRange = {
   steps:10000000,
 };
 
-export const rentPriceRanges = [
-  { label: "All", value: "all" },
-  { label: "Below THB 20,000", value: "0-20000" },
-  { label: "THB 20,000 - THB 50,000", value: "20000-50000" },
-  { label: "THB 50,000 - THB 1,00,000", value: "50000-100000" },
-  { label: "THB 1,00,000 - THB 2,50,000", value: "100000-250000" },
-  { label: "THB 2,50,000 - THB 5,00,000", value: "250000-500000" },
-  { label: "THB 5,00,000 - THB 10,00,000", value: "500000-1000000" },
-  { label: "Above THB 10,00,000", value: "1000000-" },
+export const listingTypes = [
+  {
+    label: "Rent",
+    value: "rent",
+  },
+  {
+    label: "Buy",
+    value: "buy",
+  },
+  {
+    label: "Lease",
+    value: "lease",
+  },
 ];
 
-export const buyPriceRanges = [
-  { label: "All", value: "all" },
-  { label: "Below THB 2,00,00,000", value: "0-20000000" },
-  { label: "THB 2,00,00,000 - THB 3,00,00,000", value: "20000000-30000000" },
-  { label: "THB 3,00,00,000 - THB 5,00,00,000", value: "30000000-50000000" },
-  { label: "Above THB 5,00,00,000", value: "50000000-" },
+export const thbRentPriceRanges = [
+  {
+    label: "All",
+    value: "all",
+  },
+  {
+    label: "Below ฿20,000",
+    value: "0-20000",
+  },
+  {
+    label: "฿20,000 - ฿50,000",
+    value: "20000-50000",
+  },
+  {
+    label: "฿50,000 - ฿1,00,000",
+    value: "50000-100000",
+  },
+  {
+    label: "฿1,00,000 - ฿2,50,000",
+    value: "100000-250000",
+  },
+  {
+    label: "฿2,50,000 - ฿5,00,000",
+    value: "250000-500000",
+  },
+  {
+    label: "฿5,00,000 - ฿10,00,000",
+    value: "500000-1000000",
+  },
+  {
+    label: "Above ฿10,00,000",
+    value: "1000000-",
+  },
 ];
 
-
-export const allPriceRanges = [
-  { label: "All", value: "all" },
-  { label: "Below THB 20,000", value: "0-20000" },
-  { label: "THB 20,000 - THB 50,000", value: "20000-50000" },
-  { label: "THB 50,000 - THB 1,00,000", value: "50000-100000" },
-  { label: "THB 1,00,000 - THB 2,50,000", value: "100000-250000" },
-  { label: "THB 2,50,000 - THB 5,00,000", value: "250000-500000" },
-  { label: "THB 5,00,000 - THB 10,00,000", value: "500000-1000000" },
-  { label: "THB 2,00,00,000 - THB 3,00,00,000", value: "20000000-30000000" },
-  { label: "THB 3,00,00,000 - THB 5,00,00,000", value: "30000000-50000000" },
-  { label: "Above THB 5,00,00,000", value: "50000000-" },
+export const thbBuyPriceRanges = [
+  {
+    label: "All",
+    value: "all",
+  },
+  {
+    label: "Below ฿2,00,00,000",
+    value: "0-20000000",
+  },
+  {
+    label: "฿2,00,00,000 - ฿3,00,00,000",
+    value: "20000000-30000000",
+  },
+  {
+    label: "฿3,00,00,000 - ฿5,00,00,000",
+    value: "30000000-50000000",
+  },
+  {
+    label: "Above ฿5,00,00,000",
+    value: "50000000-",
+  },
 ];
 
-export const locationsData = {
-  "Koh Phangan": [
-    "Hin Kong",
-    "Sri Thanu",
-    "Haad Yao",
-    "Haad Salad",
-    "Thong Sala",
-    "Chaloklum",
-    "Baan Tai",
-    "Haad Rin",
-    "Mae Haad",
-    "Wok Tum",
-  ],
+export const thbLeasePriceRanges = [
+  ...thbRentPriceRanges,
+];
 
-  "Koh Samui": [
-    "Chaweng",
-    "Lamai",
-    "Bophut",
-    "Maenam",
-    "Bangrak",
-    "Choeng Mon",
-    "Plai Laem",
-    "Nathon",
-  ],
-
-  "Phuket": [
-    "Bang Tao",
-    "Kamala",
-    "Patong",
-    "Kata",
-    "Karon",
-    "Rawai",
-    "Nai Harn",
-  ],
-}
+export const thbAllPriceRanges = [
+  ...thbRentPriceRanges.slice(0, -1),
+  {
+    label: "฿2,00,00,000 - ฿3,00,00,000",
+    value: "20000000-30000000",
+  },
+  {
+    label: "฿3,00,00,000 - ฿5,00,00,000",
+    value: "30000000-50000000",
+  },
+  {
+    label: "Above ฿5,00,00,000",
+    value: "50000000-",
+  },
+];

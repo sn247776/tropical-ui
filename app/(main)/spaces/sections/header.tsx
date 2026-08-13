@@ -24,7 +24,7 @@ function PropertyHeader({ property }: any) {
 
       case "rent":
         return (
-          <div className="space-y-2 text-right">
+          <div className="space-y-2 text-right flex flex-wrap gap-4 justify-center items-center">
 
             {pricing.monthlyRate > 0 && (
               <div>
@@ -49,7 +49,7 @@ function PropertyHeader({ property }: any) {
                   Weekly Rent
                 </p>
 
-                <p className="font-semibold">
+                <p className="text-2xl font-bold text-primary">
                   <CurrencyProvider
                     price={pricing.weeklyRate}
                   />
@@ -66,7 +66,7 @@ function PropertyHeader({ property }: any) {
                   Daily Rent
                 </p>
 
-                <p className="font-semibold">
+                <p className="text-2xl font-bold text-primary">
                   <CurrencyProvider
                     price={pricing.dailyRate}
                   />

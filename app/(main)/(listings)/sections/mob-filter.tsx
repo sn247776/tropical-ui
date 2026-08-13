@@ -12,7 +12,7 @@ import PropertyFilter from "./property-filter";
 
 
 
-function MobFilters() {
+function MobFilters({listingType}:any) {
 
   return (
     <div className="md:hidden">
@@ -21,7 +21,7 @@ function MobFilters() {
           <Button variant={"outline"}><ListFilterPlus /> Filters</Button>
         </SheetTrigger>
         <SheetContent className="w-[300px] p-0">
-         <PropertyFilter/>
+         <PropertyFilter listingType={listingType}/>
         </SheetContent>
       </Sheet>
     </div>

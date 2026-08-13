@@ -32,9 +32,9 @@ const PropertyCard = ({
 
   // Location
   const location = [
-    property.location?.area,
-    property.location?.district,
-    property.location?.province,
+    property.locationId?.area,
+    property.locationId?.district,
+    property.locationId?.province,
   ]
     .filter(Boolean)
     .join(", ");

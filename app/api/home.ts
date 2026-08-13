@@ -16,3 +16,19 @@ export async function fetchHomeInfo() {
     return [];
   }
 }
+
+export async function getLocationsApi() {
+  const response = await fetch(
+    `${baseURL}/locations`,
+    {
+      method: "GET",
+      cache: "no-store",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch locations");
+  }
+
+  return response.json();
+}

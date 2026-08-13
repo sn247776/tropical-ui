@@ -1,6 +1,4 @@
 import PropertyCard from '@/components/global/cards/property-card'
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 import { fetchHomeInfo } from '@/app/api/home';
 
 
@@ -12,9 +10,6 @@ export default async function FeaturedProperties() {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold text-primary">Handpicked Homes</h2>
-          <Button asChild>
-            <Link href="/spaces">Explore All</Link>
-          </Button>
         </div>
         
         {properties?.data?.length > 0 ? (
