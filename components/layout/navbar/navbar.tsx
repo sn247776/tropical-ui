@@ -30,7 +30,7 @@ const Navbar = () => {
               key={href}
               href={href}
               className={`text-sm uppercase font-bold hover:text-primary ${
-                isActive(href) ? 'text-primary' : 'text-foreground'
+                isActive(href) ? 'text-primary' : 'text-black/60'
               }`}
             >
               {label}
