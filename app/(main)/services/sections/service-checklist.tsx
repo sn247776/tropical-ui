@@ -16,7 +16,7 @@ export default function ServiceChecklist({
   return (
     <div className={cn("mt-5", className)}>
       {title && (
-        <h3 className="mb-4 text-base font-semibold text-foreground text-primary">
+        <h3 className="mb-4 text-base font-semibold text-primary">
           {title}
         </h3>
       )}
