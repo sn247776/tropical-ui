@@ -27,7 +27,7 @@ export default function ServiceSection({
         </span>
       )}
 
-      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl text-primary">
         {title}
       </h2>
 

@@ -211,7 +211,7 @@ export default function OurServicesPage() {
                     </span>
                   </div>
 
-                  <h3 className="mb-3 text-xl font-semibold">
+                  <h3 className="mb-3 text-xl font-semibold text-primary">
                     {service.title}
                   </h3>
 
@@ -282,7 +282,7 @@ export default function OurServicesPage() {
             </Button>
           </div>
 
-          <div className="rounded-3xl bg-primary p-6 text-white shadow-xl md:p-10">
+          <div className="rounded-3xl bg-linear-to-b from-primary via-primary to-primary/70 p-6 text-white shadow-xl md:p-10">
             <div className="grid gap-3">
               {[
                 "Buy",
@@ -312,80 +312,7 @@ export default function OurServicesPage() {
         </div>
       </section>
 
-      {/* For owners / buyers */}
-      <section className="bg-secondary/5 py-14 md:py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-2xl border bg-background p-7 md:p-10">
-              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-                For Property Owners
-              </span>
 
-              <h3 className="mt-4 text-2xl font-semibold">
-                Looking after your property locally
-              </h3>
-
-              <p className="mt-4 leading-8 text-muted-foreground">
-                Whether you are selling, renting or simply need someone
-                reliable on Koh Phangan, we can help coordinate the practical
-                side of property ownership.
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {[
-                  "List & Promote",
-                  "Sell",
-                  "Rent",
-                  "Manage",
-                  "Maintain",
-                  "Renovate",
-                ].map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-2xl border bg-background p-7 md:p-10">
-              <span className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-                For Buyers & Investors
-              </span>
-
-              <h3 className="mt-4 text-2xl font-semibold">
-                Find the right opportunity
-              </h3>
-
-              <p className="mt-4 leading-8 text-muted-foreground">
-                Tell us what you are looking for and we can help identify
-                suitable properties based on your requirements, budget,
-                lifestyle and investment objectives.
-              </p>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {[
-                  "Property Search",
-                  "Investment",
-                  "Area Guidance",
-                  "Viewings",
-                  "Negotiation",
-                  "Coordination",
-                ].map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full bg-secondary/10 px-4 py-2 text-sm font-medium text-secondary"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Approach */}
       <section className="container mx-auto px-4 py-14 md:py-20 lg:py-24">

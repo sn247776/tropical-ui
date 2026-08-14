@@ -80,8 +80,8 @@ function MobNav() {
 
                 <div>
                   <p className="font-semibold text-sm">Address</p>
-                  <p className="text-xs">{basicInfo?.address}</p>
-                  <p className="text-xs">{basicInfo?.location}</p>
+                  <p className="text-xs">Line 1</p>
+                  <p className="text-xs">Location</p>
                 </div>
               </div>
             </div>

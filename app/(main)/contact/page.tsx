@@ -19,7 +19,7 @@ export default function ContactPage() {
       <section className="container mx-auto px-4 py-14 md:py-20 lg:py-24">
         <div className="mx-auto max-w-3xl text-center">
 
-          <h1 className="text-3xl font-semibold tracking-tight md:text-5xl">
+          <h1 className="text-3xl font-semibold tracking-tight md:text-5xl text-primary">
             Your local property partner in Koh Phangan.
           </h1>
 
@@ -35,7 +35,7 @@ export default function ContactPage() {
       <section className="container mx-auto px-4 pb-16 md:pb-24">
         <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
           {/* Contact information */}
-          <div className="relative overflow-hidden rounded-3xl bg-primary p-7 text-white md:p-10">
+          <div className="relative overflow-hidden rounded-3xl bg-linear-to-b from-primary via-primary to-primary/70 p-7 text-white md:p-10">
             <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
             <div className="absolute -bottom-20 -left-20 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
 
@@ -115,7 +115,7 @@ export default function ContactPage() {
                 Send an enquiry
               </p>
 
-              <h2 className="mt-2 text-2xl font-semibold md:text-3xl">
+              <h2 className="mt-2 text-2xl font-semibold md:text-3xl text-primary">
                 How can we help?
               </h2>
 
@@ -236,7 +236,7 @@ function ServiceCard({
       href={href}
       className="group rounded-2xl border bg-background p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
     >
-      <h3 className="text-lg font-semibold">{title}</h3>
+      <h3 className="text-lg font-semibold text-primary">{title}</h3>
 
       <p className="mt-2 text-sm leading-6 text-muted-foreground">
         {description}
