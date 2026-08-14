@@ -173,7 +173,7 @@ const PropertyCard = ({
           </Badge>
         )}
 
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 z-20">
+        <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-4 z-20">
 
           <p className="text-white font-bold text-xl">
            <CurrencyProvider price={price}/>
@@ -191,7 +191,7 @@ const PropertyCard = ({
 
         <div className="flex items-center gap-2 text-gray-500 mt-2 text-sm">
 
-          <MapPin className="h-4 w-4 flex-shrink-0" />
+          <MapPin className="h-4 w-4 shrink-0" />
 
           <span className="line-clamp-1">
             {location}

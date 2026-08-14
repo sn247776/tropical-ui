@@ -1,3 +1,4 @@
+
 "use client";
 
 import React from "react";
@@ -33,12 +34,12 @@ type ListingType = "buy" | "rent" | "lease";
 type FilterState = {
   bhk: string;
 
-  // New location fields
-  district: string[];
-  area: string[];
+  // Location
+  location: string[];
 
   minPrice: string;
   maxPrice: string;
+
   propertyType: string;
   furnishedStatus: string;
 };
@@ -54,7 +55,9 @@ const PropertyFilter = ({
   const searchParams = useSearchParams();
 
   /**
-   * Get default price range according to listing type
+   * ==========================================
+   * DEFAULT PRICE RANGE
+   * ==========================================
    */
   const getDefaultPriceRange = () => {
     switch (listingType) {
@@ -75,7 +78,9 @@ const PropertyFilter = ({
   };
 
   /**
-   * Current price range
+   * ==========================================
+   * CURRENT PRICE RANGE
+   * ==========================================
    */
   const currentRange = React.useMemo(
     () => getDefaultPriceRange(),
@@ -83,14 +88,15 @@ const PropertyFilter = ({
   );
 
   /**
-   * Default filters
+   * ==========================================
+   * DEFAULT FILTERS
+   * ==========================================
    */
   const DEFAULT_FILTERS = React.useMemo<FilterState>(
     () => ({
       bhk: "",
 
-      district: [],
-      area: [],
+      location: [],
 
       minPrice: currentRange.min.toString(),
       maxPrice: currentRange.max.toString(),
@@ -108,7 +114,9 @@ const PropertyFilter = ({
     React.useState(true);
 
   /**
-   * Get property types based on listing type
+   * ==========================================
+   * PROPERTY TYPES
+   * ==========================================
    */
   const propertyTypeOptions = React.useMemo(() => {
     switch (listingType) {
@@ -127,7 +135,9 @@ const PropertyFilter = ({
   }, [listingType]);
 
   /**
-   * Get BHK options based on listing type
+   * ==========================================
+   * BHK OPTIONS
+   * ==========================================
    */
   const currentBhkOptions = React.useMemo(() => {
     switch (listingType) {
@@ -144,33 +154,33 @@ const PropertyFilter = ({
   }, [listingType]);
 
   /**
-   * BHK is only available for Buy and Rent
+   * ==========================================
+   * CONDITIONAL FILTERS
+   * ==========================================
    */
+
+  // BHK is only available for Buy and Rent
   const showBhk =
     listingType === "buy" ||
     listingType === "rent";
 
-  /**
-   * Furnished status is currently only relevant for Rent
-   */
+  // Furnished status is only relevant for Rent
   const showFurnishedStatus =
     listingType === "rent";
 
-  /**
-   * Price is available for Buy and Rent
-   */
+  // Price is available for Buy and Rent
   const showPriceRange =
     listingType === "buy" ||
     listingType === "rent";
 
-  /**
-   * Check whether selected property is Land
-   */
+  // Check whether selected property is Land
   const isLand =
     filters.propertyType === "land";
 
   /**
-   * Load filters from URL
+   * ==========================================
+   * LOAD FILTERS FROM URL
+   * ==========================================
    */
   React.useEffect(() => {
     const params = Object.fromEntries(
@@ -180,12 +190,8 @@ const PropertyFilter = ({
     const newFilters: FilterState = {
       bhk: params.bhk || "",
 
-      district: params.district
-        ? params.district.split(",")
-        : [],
-
-      area: params.area
-        ? params.area.split(",")
+      location: params.location
+        ? params.location.split(",")
         : [],
 
       minPrice:
@@ -204,8 +210,13 @@ const PropertyFilter = ({
     };
 
     /**
-     * Lease should never have BHK
-     * or furnished status
+     * ==========================================
+     * LEASE
+     * ==========================================
+     *
+     * Lease does not use:
+     * - BHK
+     * - Furnished Status
      */
     if (listingType === "lease") {
       newFilters.bhk = "";
@@ -213,15 +224,22 @@ const PropertyFilter = ({
     }
 
     /**
-     * Buy should never have furnished status
+     * ==========================================
+     * BUY
+     * ==========================================
+     *
+     * Buy does not use furnished status.
      */
     if (listingType === "buy") {
       newFilters.furnishedStatus = "";
     }
 
     /**
-     * If property type is land,
-     * remove BHK
+     * ==========================================
+     * LAND
+     * ==========================================
+     *
+     * Land does not use BHK.
      */
     if (newFilters.propertyType === "land") {
       newFilters.bhk = "";
@@ -236,7 +254,9 @@ const PropertyFilter = ({
   ]);
 
   /**
-   * Update URL based on current filters
+   * ==========================================
+   * UPDATE URL
+   * ==========================================
    */
   const updateURL = (
     currentFilters: FilterState
@@ -244,27 +264,21 @@ const PropertyFilter = ({
     const params = new URLSearchParams();
 
     /**
-     * District
+     * ==========================================
+     * LOCATION
+     * ==========================================
      */
-    if (currentFilters.district.length > 0) {
+    if (currentFilters.location.length > 0) {
       params.set(
-        "district",
-        currentFilters.district.join(",")
+        "location",
+        currentFilters.location.join(",")
       );
     }
 
     /**
-     * Area
-     */
-    if (currentFilters.area.length > 0) {
-      params.set(
-        "area",
-        currentFilters.area.join(",")
-      );
-    }
-
-    /**
-     * Property Type
+     * ==========================================
+     * PROPERTY TYPE
+     * ==========================================
      */
     if (currentFilters.propertyType) {
       params.set(
@@ -274,7 +288,9 @@ const PropertyFilter = ({
     }
 
     /**
+     * ==========================================
      * BHK
+     * ==========================================
      *
      * Only Buy/Rent
      * Only if property isn't Land
@@ -291,7 +307,9 @@ const PropertyFilter = ({
     }
 
     /**
-     * Furnished Status
+     * ==========================================
+     * FURNISHED STATUS
+     * ==========================================
      *
      * Only Rent
      */
@@ -306,7 +324,9 @@ const PropertyFilter = ({
     }
 
     /**
-     * Price
+     * ==========================================
+     * PRICE
+     * ==========================================
      *
      * Only Buy/Rent
      */
@@ -332,7 +352,8 @@ const PropertyFilter = ({
       }
     }
 
-    const queryString = params.toString();
+    const queryString =
+      params.toString();
 
     router.push(
       queryString
@@ -345,7 +366,9 @@ const PropertyFilter = ({
   };
 
   /**
-   * Handle filter change
+   * ==========================================
+   * HANDLE FILTER CHANGE
+   * ==========================================
    */
   const handleFilterChange = (
     name: keyof FilterState,
@@ -357,6 +380,10 @@ const PropertyFilter = ({
     };
 
     /**
+     * ==========================================
+     * LAND
+     * ==========================================
+     *
      * If Land is selected:
      * - Clear BHK
      */
@@ -368,7 +395,13 @@ const PropertyFilter = ({
     }
 
     /**
-     * Lease never uses BHK/Furnished
+     * ==========================================
+     * LEASE
+     * ==========================================
+     *
+     * Lease never uses:
+     * - BHK
+     * - Furnished Status
      */
     if (listingType === "lease") {
       newFilters.bhk = "";
@@ -376,7 +409,12 @@ const PropertyFilter = ({
     }
 
     /**
-     * Buy never uses Furnished Status
+     * ==========================================
+     * BUY
+     * ==========================================
+     *
+     * Buy never uses:
+     * - Furnished Status
      */
     if (listingType === "buy") {
       newFilters.furnishedStatus = "";
@@ -390,7 +428,9 @@ const PropertyFilter = ({
   };
 
   /**
-   * Handle price slider
+   * ==========================================
+   * HANDLE PRICE CHANGE
+   * ==========================================
    */
   const handlePriceChange = React.useCallback(
     ({
@@ -424,7 +464,9 @@ const PropertyFilter = ({
   );
 
   /**
-   * Clear all filters
+   * ==========================================
+   * CLEAR FILTERS
+   * ==========================================
    */
   const clearFilters = () => {
     setFilters(DEFAULT_FILTERS);
@@ -455,22 +497,13 @@ const PropertyFilter = ({
 
           <div className="mt-1">
             <LocationListSelect
-              districtValue={filters.district}
-              setDistrictValue={(value) =>
+              locationValue={filters.location}
+              setLocationValue={(value) =>
                 handleFilterChange(
-                  "district",
+                  "location",
                   value
                 )
               }
-              areaValue={filters.area}
-              setAreaValue={(value) =>
-                handleFilterChange(
-                  "area",
-                  value
-                )
-              }
-              districtMaxW="w-full"
-              areaMaxW="w-full"
             />
           </div>
         </div>
@@ -662,3 +695,4 @@ const PropertyFilter = ({
 };
 
 export default PropertyFilter;
+

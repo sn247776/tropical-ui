@@ -34,7 +34,7 @@ export default function AboutPage() {
             />
 
             {/* Image overlay */}
-            <div className="absolute inset-0 bg-gradient-to from-black/60 via-black/10 to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent" />
 
             {/* Image caption */}
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 text-white">
@@ -42,7 +42,7 @@ export default function AboutPage() {
                 Tropical Roots Realty
               </p>
 
-              <p className="text-2xl md:text-3xl font-semibold mt-2">
+              <p className="text-xl md:text-2xl font-semibold mt-2">
                 Property services rooted in Koh Phangan
               </p>
             </div>

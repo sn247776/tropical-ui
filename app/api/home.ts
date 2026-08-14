@@ -19,7 +19,7 @@ export async function fetchHomeInfo() {
 
 export async function getLocationsApi() {
   const response = await fetch(
-    `${baseURL}/locations`,
+    `${baseURL}/locations/areas/all`,
     {
       method: "GET",
       cache: "no-store",
