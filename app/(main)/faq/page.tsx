@@ -996,7 +996,7 @@ export default function FAQPage() {
   return (
     <div className="overflow-hidden">
       {/* Hero */}
-      <UniversalHero page="Frequently Asked Questions" />
+      <UniversalHero page="FAQ" />
 
       {/* Intro */}
       <section className="container mx-auto">
