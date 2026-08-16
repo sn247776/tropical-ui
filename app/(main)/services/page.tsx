@@ -10,12 +10,12 @@ import {
   Search,
   Settings,
   TrendingUp,
+  CheckCircle2,
 } from "lucide-react";
 
 import UniversalHero from "@/components/layout/universal-hero";
 import SectionTitle from "@/components/layout/section-title";
 import { Button } from "@/components/ui/button";
-
 
 const services = [
   {
@@ -148,32 +148,31 @@ const services = [
 
 export default function OurServicesPage() {
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden bg-background">
+      {/* Hero */}
       <UniversalHero page="Our Services" />
 
       {/* Intro */}
       <section className="container mx-auto px-4 py-14 md:py-20 lg:py-24">
         <div className="mx-auto max-w-4xl text-center">
-          <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+          <span className="inline-block text-sm font-semibold uppercase tracking-[0.2em] text-primary">
             Tropical Roots Realty
           </span>
 
-          <h1 className="mb-5">
-            More than a property agency.
-            <span className="block text-primary">
-              Your local property partner.
-            </span>
+          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-primary md:text-5xl">
+            Property services built around your needs.
           </h1>
 
-          <p className="mx-auto max-w-3xl text-base leading-8 text-muted-foreground md:text-lg">
-            At Tropical Roots Realty, we believe property services should be
-            professional, efficient and fairly priced.
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-muted-foreground md:text-lg">
+            From buying and selling to renting, property management,
+            renovation and investment, we provide practical local support
+            throughout your property journey in Koh Phangan.
           </p>
 
           <p className="mx-auto mt-4 max-w-3xl text-base leading-8 text-muted-foreground">
-            Whether you are selling, renting, buying, investing, maintaining
-            or improving a property, we provide practical support and local
-            coordination across Koh Phangan.
+            Our goal is simple: make property easier to understand, easier to
+            manage and easier to navigate with reliable local support at every
+            stage.
           </p>
         </div>
       </section>
@@ -184,7 +183,7 @@ export default function OurServicesPage() {
           <SectionTitle
             align="center"
             title="What We Do"
-            heading="Property services for every stage"
+            heading="Complete property services in Koh Phangan."
             desc="From your first property search to long-term ownership, we can help coordinate the people, information and services you need."
           />
 
@@ -195,37 +194,42 @@ export default function OurServicesPage() {
               return (
                 <div
                   key={service.slug}
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-background p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                  className="group relative flex h-full flex-col items-center overflow-hidden rounded-2xl border bg-background p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-xl"
                 >
-                  <div className="absolute right-5 top-5 text-5xl font-bold text-primary/5">
+                  {/* Background Number */}
+                  <div className="pointer-events-none absolute right-5 top-3 text-6xl font-bold text-primary/5">
                     {service.number}
                   </div>
 
-                  <div className="relative mb-6 flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white">
-                      <Icon size={23} />
-                    </div>
-
-                    <span className="text-sm font-semibold text-muted-foreground">
-                      {service.number}
-                    </span>
+                  {/* Icon */}
+                  <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-300 group-hover:bg-primary group-hover:text-white">
+                    <Icon size={25} />
                   </div>
 
-                  <h3 className="mb-3 text-xl font-semibold text-primary">
+                  {/* Number */}
+                  <span className="relative mt-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                    Service {service.number}
+                  </span>
+
+                  {/* Title */}
+                  <h3 className="mt-3 text-xl font-semibold leading-tight text-primary">
                     {service.title}
                   </h3>
 
-                  <p className="mb-6 flex-1 text-sm leading-7 text-muted-foreground">
+                  {/* Description */}
+                  <p className="mt-3 flex-1 text-sm leading-7 text-muted-foreground">
                     {service.description}
                   </p>
 
-                  <div className="mb-6 space-y-2">
+                  {/* Points */}
+                  <div className="mt-6 w-full space-y-2.5 border-t border-border/70 pt-5">
                     {service.points.map((point) => (
                       <div
                         key={point}
-                        className="flex items-center gap-2 text-sm"
+                        className="flex items-center justify-center gap-2 text-sm"
                       >
-                        <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                        <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" />
+
                         <span className="text-muted-foreground">
                           {point}
                         </span>
@@ -233,10 +237,11 @@ export default function OurServicesPage() {
                     ))}
                   </div>
 
+                  {/* Button */}
                   <Button
                     asChild
                     variant="outline"
-                    className="group/button w-full"
+                    className="group/button mt-6 w-full rounded-xl"
                   >
                     <Link href={`/services/${service.slug}`}>
                       Explore Service
@@ -250,85 +255,22 @@ export default function OurServicesPage() {
         </div>
       </section>
 
-      {/* Property lifecycle */}
-      <section className="container mx-auto px-4 py-14 md:py-20 lg:py-24">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
-          <div>
-            <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-              One Local Partner
-            </span>
-
-            <h2 className="mb-6">
-              Supporting your property through its entire lifecycle.
-            </h2>
-
-            <p className="mb-5 leading-8 text-muted-foreground">
-              Property ownership does not end when the transaction is
-              completed. Your needs can change over time, and having a reliable
-              local partner can make those changes much easier to manage.
-            </p>
-
-            <p className="leading-8 text-muted-foreground">
-              From finding a property to renting, maintaining, renovating,
-              managing or eventually selling it, Tropical Roots Realty aims to
-              remain useful throughout the journey.
-            </p>
-
-            <Button asChild className="mt-7">
-              <Link href="/contact">
-                Talk to Our Team
-                <ArrowRight className="ml-2 size-4" />
-              </Link>
-            </Button>
-          </div>
-
-          <div className="rounded-3xl bg-linear-to-b from-primary via-primary to-primary/70 p-6 text-white shadow-xl md:p-10">
-            <div className="grid gap-3">
-              {[
-                "Buy",
-                "Sell",
-                "Rent",
-                "Manage",
-                "Maintain",
-                "Renovate",
-                "Build",
-              ].map((item, index, array) => (
-                <div key={item}>
-                  <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-5 py-4">
-                    <span className="font-medium">{item}</span>
-
-                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-sm">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-
-                  {index !== array.length - 1 && (
-                    <div className="ml-8 h-3 w-px bg-white/20" />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-
       {/* Approach */}
       <section className="container mx-auto px-4 py-14 md:py-20 lg:py-24">
         <div className="mx-auto max-w-4xl text-center">
-          <span className="mb-4 inline-block text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+          <span className="inline-block text-sm font-semibold uppercase tracking-[0.2em] text-primary">
             Our Approach
           </span>
 
-          <h2 className="mb-6">
-            Good business is built on good relationships.
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-primary md:text-4xl">
+            Local knowledge. Professional service. Personal care.
           </h2>
 
-          <p className="text-base leading-8 text-muted-foreground md:text-lg">
-            We believe in looking beyond the transaction and creating
-            relationships that continue long after a property is sold or
-            rented.
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-8 text-muted-foreground md:text-lg">
+            We believe good property service is about more than completing a
+            transaction. It is about clear communication, dependable support
+            and relationships that continue long after a property is bought,
+            sold or rented.
           </p>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -340,28 +282,61 @@ export default function OurServicesPage() {
             ].map((item) => (
               <div
                 key={item}
-                className="rounded-xl border bg-muted/30 px-5 py-5 font-medium"
+                className="flex flex-col items-center justify-center rounded-xl border bg-muted/30 px-5 py-5 text-center font-medium transition-all hover:border-primary/20 hover:bg-primary/5"
               >
-                {item}
+                <CheckCircle2 className="mb-2 h-5 w-5 text-primary" />
+
+                <span>{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-primary px-4 py-14 text-white md:py-20">
-        <div className="container mx-auto text-center">
-          <h2 className="text-white">
-            Need help with a property in Koh Phangan?
-          </h2>
+      {/* Bottom CTA */}
+      <section className="container mx-auto px-4 pb-16 md:pb-24">
+        <div className="relative overflow-hidden rounded-3xl bg-linear-to-b from-primary via-primary/90 to-primary/60 px-6 py-12 text-center text-white md:px-10 md:py-16">
+          {/* Decorative shapes */}
+          <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+          <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
 
-          <p className="mx-auto mt-4 max-w-2xl leading-7 text-white/75">
-            Whether you are buying, selling, renting, maintaining or improving
-            a property, our team is here to help you understand the next step.
-          </p>
+          <div className="relative z-10 mx-auto max-w-3xl">
+            <p className="text-sm font-medium uppercase tracking-[0.2em] text-white/60">
+              Tropical Roots Realty
+            </p>
 
+            <h2 className="mt-4 text-3xl font-semibold md:text-4xl">
+              Need help with a property in Koh Phangan?
+            </h2>
 
+            <p className="mx-auto mt-5 max-w-2xl leading-7 text-white/75">
+              Whether you are buying, selling, renting, maintaining or
+              improving a property, our team is here to help you understand
+              your options and take the next step with confidence.
+            </p>
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Button
+                asChild
+                className="h-12 rounded-xl bg-white px-7 text-primary hover:bg-white/90"
+              >
+                <Link href="/contact">
+                  Talk to Our Team
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+
+              <Button
+                asChild
+                variant="outline"
+                className="h-12 rounded-xl border-white/20 bg-white/10 px-7 text-white hover:bg-white/20 hover:text-white"
+              >
+                <Link href="/">
+                  Explore Properties
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
     </div>
