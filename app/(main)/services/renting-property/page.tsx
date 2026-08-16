@@ -11,7 +11,7 @@ export default function RentingPropertyPage() {
     <div>
       <UniversalHero page="Renting Your Property" />
 
-      <main className="container mx-auto">
+      <main className="container mx-auto px-4">
         <div className="py-middel md:py-sections">
           <ServiceIntro
             eyebrow="04 — Renting Your Property"

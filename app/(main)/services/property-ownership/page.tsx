@@ -5,22 +5,22 @@ import ServiceChecklist from "../sections/service-checklist";
 import ServiceCta from "../sections/service-cta";
 import ServiceDisclaimer from "../sections/service-disclaimer";
 
-
-
 export default function PropertyOwnershipPage() {
   return (
-    <div>
+    <div className="overflow-hidden bg-background">
       <UniversalHero page="Property Ownership" />
 
-      <main className="container mx-auto">
-        <div className="py-middel md:py-sections">
+      <main className="container mx-auto px-4">
+        <div className="py-14 md:py-20 lg:py-24">
+          {/* Intro */}
           <ServiceIntro
             eyebrow="01 — Property Ownership"
             title="Understand how property ownership works in Thailand."
             description="Buying property in Thailand can be very different from buying property in your home country, particularly for foreign buyers."
           />
 
-          <div className="mt-sections">
+          {/* Content */}
+          <div className="mx-auto mt-14 max-w-4xl md:mt-20">
             <ServiceSection title="Understanding Property Ownership">
               <p>
                 At Tropical Roots Realty, we help you understand the different
@@ -72,9 +72,7 @@ export default function PropertyOwnershipPage() {
             </ServiceSection>
 
             <ServiceSection title="Before You Commit to a Property">
-              <p>
-                Ownership is only one part of the picture.
-              </p>
+              <p>Ownership is only one part of the picture.</p>
 
               <ServiceChecklist
                 items={[
@@ -118,18 +116,24 @@ export default function PropertyOwnershipPage() {
             </ServiceSection>
           </div>
 
-          <ServiceCta
-            title="Considering a property in Koh Phangan?"
-            description="Tell us what you are looking for and we can help you understand the property and coordinate the next steps."
-            buttonText="Contact Tropical Roots"
-          />
+          {/* CTA */}
+          <div className="mx-auto mt-14 max-w-5xl md:mt-20">
+            <ServiceCta
+              title="Considering a property in Koh Phangan?"
+              description="Tell us what you are looking for and we can help you understand the property and coordinate the next steps."
+              buttonText="Contact Tropical Roots"
+            />
+          </div>
 
-          <ServiceDisclaimer className="mt-8">
-            This information is provided for general educational purposes and
-            is not legal, tax or financial advice. Thai property laws and
-            regulations can change. Independent professional advice should
-            always be obtained before completing a transaction.
-          </ServiceDisclaimer>
+          {/* Disclaimer */}
+          <div className="mx-auto mt-6 max-w-5xl">
+            <ServiceDisclaimer>
+              This information is provided for general educational purposes and
+              is not legal, tax or financial advice. Thai property laws and
+              regulations can change. Independent professional advice should
+              always be obtained before completing a transaction.
+            </ServiceDisclaimer>
+          </div>
         </div>
       </main>
     </div>

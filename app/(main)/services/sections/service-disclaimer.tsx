@@ -14,13 +14,15 @@ export default function ServiceDisclaimer({
   return (
     <div
       className={cn(
-        "flex gap-3 rounded-xl border border-border bg-muted/40 p-5",
+        "flex flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-muted/30 px-5 py-6 text-center sm:px-8",
         className
       )}
     >
-      <Info className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
+        <Info className="h-4 w-4" />
+      </div>
 
-      <p className="text-sm leading-7 text-muted-foreground">
+      <p className="max-w-3xl text-xs leading-6 text-muted-foreground sm:text-sm sm:leading-7">
         {children}
       </p>
     </div>

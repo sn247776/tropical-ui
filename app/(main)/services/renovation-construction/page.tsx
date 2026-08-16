@@ -11,7 +11,7 @@ export default function RenovationConstructionPage() {
     <div>
       <UniversalHero page="Renovation & Construction" />
 
-      <main className="container mx-auto">
+      <main className="container mx-auto px-4">
         <div className="py-middel md:py-sections">
           <ServiceIntro
             eyebrow="06 — Renovation & Construction"

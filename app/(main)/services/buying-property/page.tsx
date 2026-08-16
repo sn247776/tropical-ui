@@ -11,7 +11,7 @@ export default function BuyingPropertyPage() {
     <div>
       <UniversalHero page="Buying Property" />
 
-      <main className="container mx-auto">
+      <main className="container mx-auto px-4">
         <div className="py-middel md:py-sections">
           <ServiceIntro
             eyebrow="02 — Buying Property"

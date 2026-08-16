@@ -11,7 +11,7 @@ export default function KohPhanganAreaGuidePage() {
     <div>
       <UniversalHero page="Koh Phangan Area Guide" />
 
-      <main className="container mx-auto">
+      <main className="container mx-auto px-4">
         <div className="py-middel md:py-sections">
           <ServiceIntro
             eyebrow="08 — Koh Phangan Area Guide"

@@ -11,7 +11,7 @@ export default function OwningManagingPropertyPage() {
     <div>
       <UniversalHero page="Owning & Managing Property" />
 
-      <main className="container mx-auto">
+      <main className="container mx-auto px-4">
         <div className="py-middel md:py-sections">
           <ServiceIntro
             eyebrow="09 — Owning & Managing Property"

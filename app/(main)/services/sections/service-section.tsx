@@ -17,21 +17,21 @@ export default function ServiceSection({
   return (
     <section
       className={cn(
-        "border-t border-border py-10 first:border-t-0",
+        "border-t border-border py-10 text-center first:border-t-0 md:py-12",
         className
       )}
     >
       {eyebrow && (
-        <span className="mb-2 block text-sm font-medium uppercase tracking-[0.15em] text-primary">
+        <span className="mb-2 inline-block text-sm font-semibold uppercase tracking-[0.15em] text-primary">
           {eyebrow}
         </span>
       )}
 
-      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl text-primary">
+      <h2 className="text-2xl font-semibold tracking-tight text-primary sm:text-3xl">
         {title}
       </h2>
 
-      <div className="mt-5 max-w-4xl space-y-4 text-base leading-8 text-muted-foreground">
+      <div className="mx-auto mt-5 max-w-3xl space-y-4 text-base leading-8 text-muted-foreground">
         {children}
       </div>
     </section>

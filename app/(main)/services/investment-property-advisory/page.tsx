@@ -11,7 +11,7 @@ export default function InvestmentPropertyAdvisoryPage() {
     <div>
       <UniversalHero page="Investment & Property Advisory" />
 
-      <main className="container mx-auto">
+      <main className="container mx-auto px-4">
         <div className="py-middel md:py-sections">
           <ServiceIntro
             eyebrow="07 — Investment & Property Advisory"

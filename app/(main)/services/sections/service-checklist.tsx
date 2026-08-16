@@ -14,9 +14,9 @@ export default function ServiceChecklist({
   className,
 }: ServiceChecklistProps) {
   return (
-    <div className={cn("mt-5", className)}>
+    <div className={cn("mt-7", className)}>
       {title && (
-        <h3 className="mb-4 text-base font-semibold text-primary">
+        <h3 className="mb-5 text-center text-base font-semibold text-primary">
           {title}
         </h3>
       )}
@@ -25,9 +25,9 @@ export default function ServiceChecklist({
         {items.map((item, index) => (
           <li
             key={`${item}-${index}`}
-            className="flex items-start gap-3 rounded-lg border border-border bg-muted/30 px-4 py-3"
+            className="flex min-h-[64px] items-center justify-center gap-3 rounded-xl border border-border bg-muted/30 px-4 py-3 text-center transition-colors hover:border-primary/20 hover:bg-primary/5"
           >
-            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
               <Check className="h-3.5 w-3.5" />
             </span>
 

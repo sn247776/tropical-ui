@@ -23,32 +23,40 @@ export default function ServiceCta({
   return (
     <section
       className={cn(
-        "overflow-hidden rounded-2xl bg-primary px-6 py-10 text-primary-foreground sm:px-10 sm:py-12 lg:px-14",
+        "relative overflow-hidden rounded-3xl bg-linear-to-b from-primary via-primary/90 to-primary/60 px-6 py-12 text-center text-white md:px-10 md:py-16",
         className
       )}
     >
-      <div className="flex flex-col gap-7 lg:flex-row lg:items-center lg:justify-between">
-        <div className="max-w-2xl">
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-            {title}
-          </h2>
+      {/* Decorative shapes */}
+      <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
 
-          <p className="mt-3 text-sm leading-7 text-primary-foreground/80 sm:text-base">
-            {description}
-          </p>
+      <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+
+      <div className="relative z-10 mx-auto max-w-3xl">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-white/60">
+          Tropical Roots Realty
+        </p>
+
+        <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+          {title}
+        </h2>
+
+        <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">
+          {description}
+        </p>
+
+        <div className="mt-8 flex justify-center">
+          <Button
+            asChild
+            size="lg"
+            className="h-12 rounded-xl bg-white px-7 text-primary hover:bg-white/90"
+          >
+            <Link href={href}>
+              {buttonText}
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
         </div>
-
-        <Button
-          asChild
-          variant="secondary"
-          size="lg"
-          className="w-full shrink-0 sm:w-fit"
-        >
-          <Link href={href}>
-            {buttonText}
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
       </div>
     </section>
   );
