@@ -3,7 +3,6 @@ import {
   Clock3,
   Mail,
   MapPin,
-  MessageCircle,
   Phone,
 } from "lucide-react";
 
@@ -12,13 +11,12 @@ import ContactForm from "./contact-form";
 
 export default function ContactPage() {
   return (
-    <div className="bg-background">
+    <div className="bg-background overflow-hidden">
       <UniversalHero page="Contact Us" />
 
       {/* Intro */}
       <section className="container mx-auto px-4 py-14 md:py-20 lg:py-24">
         <div className="mx-auto max-w-3xl text-center">
-
           <h1 className="text-3xl font-semibold tracking-tight md:text-5xl text-primary">
             Your local property partner in Koh Phangan.
           </h1>
@@ -31,15 +29,15 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Main contact area */}
+      {/* Main Contact Area */}
       <section className="container mx-auto px-4 pb-16 md:pb-24">
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
-          {/* Contact information */}
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] items-stretch">
+          {/* Contact Information */}
           <div className="relative overflow-hidden rounded-3xl bg-linear-to-b from-primary via-primary to-primary/70 p-7 text-white md:p-10">
             <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
             <div className="absolute -bottom-20 -left-20 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
 
-            <div className="relative z-10">
+            <div className="relative z-10 flex h-full flex-col items-center text-center">
               <p className="text-sm font-medium uppercase tracking-[0.2em] text-white/70">
                 Get in touch
               </p>
@@ -54,7 +52,8 @@ export default function ContactPage() {
                 property support.
               </p>
 
-              <div className="mt-10 space-y-5">
+              {/* Contact Details */}
+              <div className="mt-10 w-full max-w-md space-y-6">
                 <ContactInfo
                   icon={Mail}
                   title="Email"
@@ -82,12 +81,13 @@ export default function ContactPage() {
                 />
               </div>
 
-              <div className="mt-10 border-t border-white/15 pt-7">
+              {/* We Work With */}
+              <div className="mt-10 w-full max-w-md border-t border-white/15 pt-7">
                 <p className="text-sm text-white/60">
                   We work with
                 </p>
 
-                <div className="mt-3 flex flex-wrap gap-2">
+                <div className="mt-3 flex flex-wrap justify-center gap-2">
                   {[
                     "Buyers",
                     "Sellers",
@@ -110,7 +110,7 @@ export default function ContactPage() {
 
           {/* Form */}
           <div className="rounded-3xl border bg-card p-6 shadow-sm md:p-10">
-            <div className="mb-8">
+            <div className="mb-8 text-center">
               <p className="text-sm font-medium uppercase tracking-[0.18em] text-primary">
                 Send an enquiry
               </p>
@@ -119,18 +119,20 @@ export default function ContactPage() {
                 How can we help?
               </h2>
 
-              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+              <p className="mx-auto mt-3 max-w-xl text-sm leading-6 text-muted-foreground">
                 Complete the form below and our team will get back to you as
                 soon as possible.
               </p>
             </div>
 
-            <ContactForm />
+            <div className="mx-auto w-full max-w-2xl">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Services strip */}
+      {/* Services Strip */}
       <section className="border-y bg-muted/30">
         <div className="container mx-auto px-4 py-12 md:py-16">
           <div className="grid gap-6 md:grid-cols-3">
@@ -157,7 +159,7 @@ export default function ContactPage() {
 
       {/* Final CTA */}
       <section className="container mx-auto px-4 py-16 md:py-24">
-        <div className="overflow-hidden rounded-3xl bg-primary px-6 py-12 text-center text-white md:px-10 md:py-16">
+        <div className="overflow-hidden rounded-3xl bg-linear-to-b from-primary via-primary/90 to-primary/60 px-6 py-12 text-center text-white md:px-10 md:py-16">
           <p className="text-sm font-medium uppercase tracking-[0.2em] text-white/60">
             Tropical Roots Realty
           </p>
@@ -173,7 +175,7 @@ export default function ContactPage() {
 
           <a
             href="#contact-form"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-primary transition-transform hover:scale-[1.02]"
+            className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-primary transition-transform hover:scale-[1.02]"
           >
             Start a conversation
             <ArrowRight className="h-4 w-4" />
@@ -183,6 +185,10 @@ export default function ContactPage() {
     </div>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* Contact Info                                                               */
+/* -------------------------------------------------------------------------- */
 
 function ContactInfo({
   icon: Icon,
@@ -196,12 +202,12 @@ function ContactInfo({
   href?: string;
 }) {
   const content = (
-    <div className="flex items-start gap-4">
+    <div className="flex flex-col items-center text-center">
       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10">
         <Icon className="h-5 w-5" />
       </div>
 
-      <div>
+      <div className="mt-3">
         <p className="text-xs font-medium uppercase tracking-wider text-white/50">
           {title}
         </p>
@@ -213,14 +219,23 @@ function ContactInfo({
     </div>
   );
 
-  if (!href) return content;
+  if (!href) {
+    return content;
+  }
 
   return (
-    <a href={href} className="block transition-opacity hover:opacity-80">
+    <a
+      href={href}
+      className="block rounded-xl py-2 transition-opacity hover:opacity-80"
+    >
       {content}
     </a>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* Service Card                                                               */
+/* -------------------------------------------------------------------------- */
 
 function ServiceCard({
   title,
@@ -234,15 +249,17 @@ function ServiceCard({
   return (
     <a
       href={href}
-      className="group rounded-2xl border bg-background p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
+      className="group flex flex-col items-center rounded-2xl border bg-background p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg"
     >
-      <h3 className="text-lg font-semibold text-primary">{title}</h3>
+      <h3 className="text-lg font-semibold text-primary">
+        {title}
+      </h3>
 
-      <p className="mt-2 text-sm leading-6 text-muted-foreground">
+      <p className="mt-2 max-w-sm text-sm leading-6 text-muted-foreground">
         {description}
       </p>
 
-      <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-primary">
+      <span className="mt-5 inline-flex items-center justify-center gap-2 text-sm font-medium text-primary">
         Learn more
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </span>
