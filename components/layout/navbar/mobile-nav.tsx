@@ -11,7 +11,7 @@ import Logo from "@/assets/LOGO.png";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { MapPin, Phone } from "lucide-react";
 import { navLinks } from "../nav-links";
 import { basicInfo } from "@/stores/basic-info";
 import { FaWhatsapp } from "react-icons/fa";
@@ -44,7 +44,7 @@ function MobNav() {
                     <div
                       className={cn(
                         "flex items-center flex-1 hover:text-primary duration-300 p-items border-b",
-                        pathname === route.href ? "text-primary" : " "
+                        pathname === route.href ? "text-primary" : "text-black/60"
                       )}
                     >
                       {route.label}
