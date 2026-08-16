@@ -90,15 +90,21 @@ export default function ContactForm() {
     <form
       id="contact-form"
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-6"
+      className="w-full space-y-6"
     >
+      {/* Success Message */}
       {success && (
-        <div className="flex items-start gap-3 rounded-xl border border-green-500/20 bg-green-500/10 p-4 text-sm text-green-700 dark:text-green-400">
-          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-green-500/20 bg-green-500/10 p-5 text-center text-sm text-green-700 dark:text-green-400">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-500/10">
+            <CheckCircle2 className="h-5 w-5" />
+          </div>
 
-          <div>
-            <p className="font-semibold">Message sent successfully.</p>
-            <p className="mt-1 opacity-80">
+          <div className="mt-3">
+            <p className="font-semibold">
+              Message sent successfully.
+            </p>
+
+            <p className="mx-auto mt-1 max-w-md opacity-80">
               Thank you for contacting Tropical Roots Realty. We&apos;ll get
               back to you soon.
             </p>
@@ -106,12 +112,14 @@ export default function ContactForm() {
         </div>
       )}
 
+      {/* Server Error */}
       {serverError && (
-        <div className="rounded-xl border border-destructive/20 bg-destructive/10 p-4 text-sm text-destructive">
+        <div className="rounded-2xl border border-destructive/20 bg-destructive/10 p-4 text-center text-sm text-destructive">
           {serverError}
         </div>
       )}
 
+      {/* Name + Email */}
       <div className="grid gap-5 md:grid-cols-2">
         <FormField
           label="Your Name"
@@ -122,6 +130,7 @@ export default function ContactForm() {
             {...register("name")}
             placeholder="John Smith"
             disabled={isSubmitting}
+            className="h-12 rounded-xl text-center"
           />
         </FormField>
 
@@ -135,10 +144,12 @@ export default function ContactForm() {
             type="email"
             placeholder="john@example.com"
             disabled={isSubmitting}
+            className="h-12 rounded-xl text-center"
           />
         </FormField>
       </div>
 
+      {/* Phone + Enquiry Type */}
       <div className="grid gap-5 md:grid-cols-2">
         <FormField
           label="Phone Number"
@@ -149,6 +160,7 @@ export default function ContactForm() {
             type="tel"
             placeholder="+66..."
             disabled={isSubmitting}
+            className="h-12 rounded-xl text-center"
           />
         </FormField>
 
@@ -159,34 +171,54 @@ export default function ContactForm() {
         >
           <Select
             disabled={isSubmitting}
-            onValueChange={(value) => setValue("enquiryType", value)}
+            onValueChange={(value) =>
+              setValue("enquiryType", value, {
+                shouldValidate: true,
+              })
+            }
           >
-            <SelectTrigger>
+            <SelectTrigger className="h-12 rounded-xl justify-center text-center">
               <SelectValue placeholder="Select an option" />
             </SelectTrigger>
 
             <SelectContent>
-              <SelectItem value="buying">Buying a property</SelectItem>
-              <SelectItem value="selling">Selling my property</SelectItem>
-              <SelectItem value="renting">Renting a property</SelectItem>
+              <SelectItem value="buying">
+                Buying a property
+              </SelectItem>
+
+              <SelectItem value="selling">
+                Selling my property
+              </SelectItem>
+
+              <SelectItem value="renting">
+                Renting a property
+              </SelectItem>
+
               <SelectItem value="property-management">
                 Property management
               </SelectItem>
+
               <SelectItem value="maintenance">
                 Maintenance & repairs
               </SelectItem>
+
               <SelectItem value="renovation">
                 Renovation & construction
               </SelectItem>
+
               <SelectItem value="investment">
                 Investment opportunities
               </SelectItem>
-              <SelectItem value="other">Something else</SelectItem>
+
+              <SelectItem value="other">
+                Something else
+              </SelectItem>
             </SelectContent>
           </Select>
         </FormField>
       </div>
 
+      {/* Message */}
       <FormField
         label="How can we help?"
         required
@@ -197,12 +229,13 @@ export default function ContactForm() {
           placeholder="Tell us about the property, area, budget or what you need help with..."
           rows={7}
           disabled={isSubmitting}
-          className="resize-none"
+          className="resize-none rounded-xl text-center"
         />
       </FormField>
 
-      <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
-        <p className="max-w-md text-xs leading-5 text-muted-foreground">
+      {/* Submit Area */}
+      <div className="flex flex-col items-center gap-4 pt-2">
+        <p className="max-w-md text-center text-xs leading-5 text-muted-foreground">
           By submitting this form, you agree that we may contact you regarding
           your enquiry.
         </p>
@@ -210,7 +243,7 @@ export default function ContactForm() {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="h-12 rounded-xl px-7"
+          className="h-12 rounded-xl px-8"
         >
           {isSubmitting ? (
             <>
@@ -241,10 +274,12 @@ function FormField({
   children: React.ReactNode;
 }) {
   return (
-    <div className="space-y-2">
-      <label className="text-sm font-medium">
+    <div className="space-y-2 text-center">
+      <label className="block text-sm font-medium text-foreground">
         {label}
-        {required && <span className="ml-1 text-destructive">*</span>}
+        {required && (
+          <span className="ml-1 text-destructive">*</span>
+        )}
       </label>
 
       {children}
