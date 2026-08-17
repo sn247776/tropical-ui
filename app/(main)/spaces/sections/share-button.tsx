@@ -19,7 +19,7 @@ import { FaShareFromSquare } from "react-icons/fa6";
 import { toast } from "sonner";
 
 export function ShareButton({ big = true, propertyCode }: {big?:boolean, propertyCode:any}) {
-  const currentUrl = `https://www.leasebuysell.in/share/${propertyCode}`;
+  const currentUrl = `${window.location.origin}/share/${propertyCode}`;
 
 
   const copyToClipboard = () => {

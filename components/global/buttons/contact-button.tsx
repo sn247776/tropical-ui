@@ -1,13 +1,24 @@
-'use client'
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Phone } from "lucide-react";
 import React from "react";
 
-function ContactButton({className,propertyCode}:{className?:any,propertyCode:any}) {
+function ContactButton({
+  className,
+  propertyCode,
+}: {
+  className?: string;
+  propertyCode: string;
+}) {
   const handleClick = () => {
-    const currentUrl = `https://www.leasebuysell.in/share/${propertyCode}`;
+    const currentUrl = `${window.location.origin}/share/${propertyCode}`;
+
     const message = `I am interested in this space: ${currentUrl}`;
-    const whatsappUrl = `https://wa.me/917042104442?text=${encodeURIComponent(message)}`;
+
+    const whatsappUrl = `https://wa.me/66801833017?text=${encodeURIComponent(
+      message
+    )}`;
 
     window.open(whatsappUrl, "_blank");
   };

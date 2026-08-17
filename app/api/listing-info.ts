@@ -25,6 +25,30 @@ export async function fetchPropertyInfo(
   }
 }
 
+export async function fetchInfoByCode(
+  code: string
+) {
+  try {
+    const response = await fetch(
+      `${baseURL}/code/${code}/`,
+      {
+        cache: "no-store",
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch property");
+    }
+
+    const data = await response.json();
+
+    return data.data;
+  } catch (error) {
+    console.error("Fetch error:", error);
+    return null;
+  }
+}
+
 
 
 export async function fetchBuyList(props:any) {

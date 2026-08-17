@@ -1,9 +1,9 @@
 import React from "react";
-import { fetchPropertyInfo } from "@/app/api/listing-info";
-import ViewSpace from "./view-space";
+import { fetchInfoByCode } from "@/app/api/listing-info";
+import ViewSpace from "../../spaces/[type]/[id]/view-space";
+
 
 interface IParams {
-  type?: any
   id?: any;
 }
 
@@ -12,8 +12,8 @@ export default async function PropertieDetails({
 }: {
   params: IParams;
 }) {
-  const { type, id } = await params;
-  const property = await fetchPropertyInfo(type, id);
+  const { id } = await params;
+  const property = await fetchInfoByCode(id);
 
 
   return (
