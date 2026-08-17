@@ -9,7 +9,9 @@ import DetailsSection from "../../sections/details-section";
 import LocationHighlights from "../../sections/location-highlights";
 import SimilarProperties from "../../sections/similar-properties";
 import CallToAction from "../../sections/call-to-action";
-import LocationPropertyInfo from "../../sections/location-property-info";
+import PropertyInformation from '../../sections/property-information';
+import LocationInformation from '../../sections/location-information';
+import AdditionalHighlights from '../../sections/additional-highlights';
 
 function ViewSpace({property}:any) {
   return (
@@ -57,7 +59,16 @@ function ViewSpace({property}:any) {
 
       <LocationHighlights property={property} />
 
-      <LocationPropertyInfo property={property} />
+      <div className='space-y-8 my-8'>
+
+                    <PropertyInformation property={property} />
+
+      <LocationInformation property={property} />
+
+      <AdditionalHighlights property={property} />
+      </div>
+
+
       <SimilarProperties properties={property?.similarProperties} />
       {/* Call to Action */}
       <CallToAction property={property} />
