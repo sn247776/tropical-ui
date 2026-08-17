@@ -132,7 +132,7 @@ export default function LocationInformation({
           {sortedImages.length > 0 && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-semibold">
+                <h3 className="text-sm font-semibold text-black/60">
                   Location Gallery
                 </h3>
 
