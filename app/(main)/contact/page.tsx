@@ -8,6 +8,7 @@ import {
 
 import UniversalHero from "@/components/layout/universal-hero";
 import ContactForm from "./contact-form";
+import { basicInfo } from "@/stores/basic-info";
 
 export default function ContactPage() {
   return (
@@ -57,21 +58,21 @@ export default function ContactPage() {
                 <ContactInfo
                   icon={Mail}
                   title="Email"
-                  value="hello@tropicalrootsrealty.com"
-                  href="mailto:hello@tropicalrootsrealty.com"
+                  value={basicInfo?.emails[0]}
+                  href={`mailto:${basicInfo?.emails[0]}`}
                 />
 
                 <ContactInfo
                   icon={Phone}
                   title="Phone"
-                  value="+66 77 000 0000"
-                  href="tel:+66770000000"
+                  value={basicInfo?.phones[0]}
+                  href={basicInfo?.phones[0]}
                 />
 
                 <ContactInfo
                   icon={MapPin}
                   title="Location"
-                  value="Koh Phangan, Surat Thani, Thailand"
+                  value={basicInfo?.address}
                 />
 
                 <ContactInfo

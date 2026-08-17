@@ -12,7 +12,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { MapPin, Phone } from "lucide-react";
-import { navLinks } from "../nav-links";
+import { navLinks, quickLinks } from "../nav-links";
 import { basicInfo } from "@/stores/basic-info";
 import { FaWhatsapp } from "react-icons/fa";
 
@@ -27,7 +27,7 @@ function MobNav() {
         <SheetTrigger>
           <Menu />
         </SheetTrigger>
-        <SheetContent className="w-[300px] p-4">
+        <SheetContent className="w-[300px] p-4 h-full justify-between">
           <div className="flex flex-col gap-default">
             <Link href={"/"} >
               <img
@@ -80,11 +80,24 @@ function MobNav() {
 
                 <div>
                   <p className="font-semibold text-sm">Address</p>
-                  <p className="text-xs">Line 1</p>
-                  <p className="text-xs">Location</p>
+                  <p className="text-xs">{basicInfo?.address}</p>
+                  
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="flex justify-center gap-4">
+                          {quickLinks.map((route) => (
+                <SheetClose asChild key={route.href}>
+                  <Link  href={route.href}>
+                    <div
+                    >
+                      {route.label}
+                    </div>
+                  </Link>
+                  </SheetClose>
+              ))}
           </div>
         </SheetContent>
       </Sheet>
