@@ -9,7 +9,7 @@ export const basicInfo =   {
       facebook: "https://www.facebook.com/share/16Noj4L1YG",
       twitter: "/",
       instagram: "https://www.instagram.com/lease.buy.sell",
-      whatsapp: "https://wa.me/917042104442",
+      whatsapp: "https://wa.me/66801833017",
     },
     workingHours: "Mon-Fri: 9:00 AM - 6:00 PM",
     websiteURL:'leasebuysell.in'
