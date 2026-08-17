@@ -16,9 +16,6 @@ import { GiHouse } from 'react-icons/gi';
 
 export const buyType = [
   { value: "studio", label: "Studio", icon: FaBed },
-  { value: "apartment", label: "Apartment", icon: FaBuilding },
-  { value: "condo", label: "Condo", icon: FaBuilding },
-  { value: "penthouse", label: "Penthouse", icon: FaHotel },
   { value: "duplex", label: "Duplex", icon: FaLayerGroup },
 
   { value: "house", label: "House", icon: GiHouse },
@@ -36,9 +33,6 @@ export const buyType = [
 
 export const rentType = [
   { value: "studio", label: "Studio", icon: FaBed },
-  { value: "apartment", label: "Apartment", icon: FaBuilding },
-  { value: "condo", label: "Condo", icon: FaBuilding },
-  { value: "penthouse", label: "Penthouse", icon: FaHotel },
   { value: "duplex", label: "Duplex", icon: FaLayerGroup },
 
   { value: "house", label: "House", icon: GiHouse },
