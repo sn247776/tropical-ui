@@ -149,7 +149,7 @@ export default function LocationInformation({
                 <button
                   type="button"
                   onClick={() => setSelectedImage(0)}
-                  className="group relative aspect-[16/10] md:aspect-[4/3] overflow-hidden rounded-xl bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="group relative aspect-16/10 md:aspect-4/3 overflow-hidden rounded-xl bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 >
                   <img
                     src={sortedImages[0].url}
@@ -158,7 +158,7 @@ export default function LocationInformation({
                   />
 
                   {/* Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent" />
 
                   {/* Featured Badge */}
                   {sortedImages[0].pin && (
@@ -197,7 +197,7 @@ export default function LocationInformation({
                           onClick={() =>
                             setSelectedImage(actualIndex)
                           }
-                          className="group relative aspect-[4/3] overflow-hidden rounded-xl bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                          className="group relative aspect-4/3 overflow-hidden rounded-xl bg-muted focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                         >
                           <img
                             src={image.url}
@@ -260,7 +260,7 @@ export default function LocationInformation({
       {/* Fullscreen Image Viewer */}
       {selectedImageData && selectedImage !== null && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4"
+          className="fixed h-screen inset-0 z-100 flex items-center justify-center bg-black/95 p-4"
           onClick={() => setSelectedImage(null)}
         >
           {/* Close */}
