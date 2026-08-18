@@ -13,8 +13,8 @@ function CallToAction({property}:any) {
         </div>
         <div className="flex gap-3">
           <ContactButton propertyCode={property?.propertyCode} />
-          <div className='lg:block hidden'> <VisitButton id={property?.propertyCode} /> </div>
-          <ShareButton propertyCode={property?.propertyCode} />
+          <div className='lg:block hidden'> <VisitButton isAvailable={property?.isAvailable} id={property?.propertyCode} /> </div>
+          <ShareButton isAvailable={property?.isAvailable} propertyCode={property?.propertyCode} />
         </div>
       </div>
   )

@@ -146,7 +146,7 @@ function PropertyHeader({ property }: any) {
 
         </div>
 
-        <h1 className="text-3xl font-bold">
+        <h1 className="text-3xl font-bold text-primary">
           {property.name}
         </h1>
 

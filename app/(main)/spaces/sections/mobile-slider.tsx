@@ -45,6 +45,7 @@ function MobileSlider({ property }: any) {
           <ShareButton
             big={false}
             propertyCode={property.propertyCode}
+            isAvailable={property?.isAvailable}
           />
         </div>
 

@@ -8,9 +8,10 @@ import { CalendarPlus, CalendarMinus } from 'lucide-react';
 interface VisitButtonProps {
   id: string;
   className?:string;
+  isAvailable:boolean;
 }
 
-export function VisitButton({ id,className }: VisitButtonProps) {
+export function VisitButton({ id,className,isAvailable }: VisitButtonProps) {
   const { visitIds, addVisit, removeVisit } = useVisitStore();
   const isAdded = visitIds.includes(id);
 
@@ -23,7 +24,7 @@ export function VisitButton({ id,className }: VisitButtonProps) {
   };
 
   return (
-    <Button variant={isAdded ? 'destructive' : 'outline' } onClick={handleClick} className={cn("className w-[120px] flex  gap-2", className)}>
+    <Button disabled={!isAvailable} variant={isAdded ? 'destructive' : 'outline' } onClick={handleClick} className={cn("className w-[120px] flex  gap-2", className)}>
       {isAdded ? (
         <>
           <CalendarMinus className="h-4 w-4" />

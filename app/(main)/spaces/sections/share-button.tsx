@@ -18,9 +18,20 @@ import { SiGmail } from "react-icons/si";
 import { FaShareFromSquare } from "react-icons/fa6";
 import { toast } from "sonner";
 
-export function ShareButton({ big = true, propertyCode }: {big?:boolean, propertyCode:any}) {
-  const currentUrl = `${window.location.origin}/share/${propertyCode}`;
+interface ShareButtonProps {
+  big?: boolean;
+  propertyCode: string;
+  isAvailable: boolean;
+}
 
+export function ShareButton({
+  big = true,
+  propertyCode,
+  isAvailable,
+}: ShareButtonProps) {
+  const currentUrl = `${window.location.origin}${
+    isAvailable ? "/share" : "/review"
+  }/${propertyCode}`;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(currentUrl);
@@ -28,21 +39,30 @@ export function ShareButton({ big = true, propertyCode }: {big?:boolean, propert
   };
 
   const shareViaWhatsApp = () => {
-    window.open(`https://wa.me/?text=${encodeURIComponent(currentUrl)}`);
+    window.open(
+      `https://wa.me/?text=${encodeURIComponent(currentUrl)}`,
+      "_blank"
+    );
   };
 
   const shareViaFacebook = () => {
     window.open(
       `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
         currentUrl
-      )}`
+      )}`,
+      "_blank"
     );
   };
 
   const shareViaGmail = () => {
     const subject = "Check this out!";
     const body = `I thought you might find this interesting: ${currentUrl}`;
-    window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+
+    window.open(
+      `mailto:?subject=${encodeURIComponent(
+        subject
+      )}&body=${encodeURIComponent(body)}`
+    );
   };
 
   const shareViaNative = () => {
@@ -55,7 +75,6 @@ export function ShareButton({ big = true, propertyCode }: {big?:boolean, propert
         })
         .catch(console.error);
     } else {
-      // Fallback for desktop
       toast.warning("Please use one of the other options");
     }
   };
@@ -68,55 +87,57 @@ export function ShareButton({ big = true, propertyCode }: {big?:boolean, propert
           {big && <span>Share</span>}
         </Button>
       </DialogTrigger>
+
       <DialogContent className="w-[90vw] max-w-[425px] sm:w-full">
         <DialogHeader>
           <DialogTitle className="text-center sm:text-left">
             Share this page
           </DialogTitle>
         </DialogHeader>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 py-2 sm:py-4">
+
+        <div className="grid grid-cols-2 gap-3 py-2 sm:grid-cols-4 sm:gap-4 sm:py-4">
           <Button
             variant="outline"
-            className="flex flex-col items-center gap-2 h-auto py-3 sm:py-4"
+            className="flex h-auto flex-col items-center gap-2 py-3 sm:py-4"
             onClick={copyToClipboard}
           >
-            <FaLink className="w-5 h-5 sm:w-6 sm:h-6" />
+            <FaLink className="h-5 w-5 sm:h-6 sm:w-6" />
             <span className="text-xs sm:text-sm">Copy Link</span>
           </Button>
 
           <Button
             variant="outline"
-            className="flex flex-col items-center gap-2 h-auto py-3 sm:py-4"
+            className="flex h-auto flex-col items-center gap-2 py-3 sm:py-4"
             onClick={shareViaWhatsApp}
           >
-            <FaWhatsapp className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
+            <FaWhatsapp className="h-5 w-5 text-green-600 sm:h-6 sm:w-6" />
             <span className="text-xs sm:text-sm">WhatsApp</span>
           </Button>
 
           <Button
             variant="outline"
-            className="flex flex-col items-center gap-2 h-auto py-3 sm:py-4"
+            className="flex h-auto flex-col items-center gap-2 py-3 sm:py-4"
             onClick={shareViaFacebook}
           >
-            <FaFacebook className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+            <FaFacebook className="h-5 w-5 text-blue-600 sm:h-6 sm:w-6" />
             <span className="text-xs sm:text-sm">Facebook</span>
           </Button>
 
           <Button
             variant="outline"
-            className="flex flex-col items-center gap-2 h-auto py-3 sm:py-4"
+            className="flex h-auto flex-col items-center gap-2 py-3 sm:py-4"
             onClick={shareViaGmail}
           >
-            <SiGmail className="w-5 h-5 sm:w-6 sm:h-6 text-red-500" />
+            <SiGmail className="h-5 w-5 text-red-500 sm:h-6 sm:w-6" />
             <span className="text-xs sm:text-sm">Gmail</span>
           </Button>
 
           <Button
             variant="outline"
-            className="flex flex-col items-center gap-2 h-auto py-3 sm:py-4 col-span-2 sm:col-span-4"
+            className="col-span-2 flex h-auto flex-col items-center gap-2 py-3 sm:col-span-4 sm:py-4"
             onClick={shareViaNative}
           >
-            <FaEllipsisH className="w-5 h-5 sm:w-6 sm:h-6" />
+            <FaEllipsisH className="h-5 w-5 sm:h-6 sm:w-6" />
             <span className="text-xs sm:text-sm">More Options</span>
           </Button>
         </div>
