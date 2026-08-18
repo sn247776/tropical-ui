@@ -344,7 +344,7 @@ function VisitCard({ property }: VisitCardProps) {
             {/* VISIT */}
 
             {propertyCode && (
-              <VisitButton id={propertyCode} />
+              <VisitButton isAvailable={property?.isAvailable} id={propertyCode} />
             )}
 
           </div>
