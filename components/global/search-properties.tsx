@@ -1,12 +1,8 @@
-
 "use client";
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import {
-  Search,
-  MapPin,
-} from "lucide-react";
+import { Search, MapPin } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -28,6 +24,8 @@ import {
   rentType,
   leaseType,
 } from "@/stores/data-list";
+import { LocationListSelect } from "./location-list";
+
 
 interface SearchPropertiesClientProps {
   locations: string[];
@@ -44,8 +42,9 @@ export default function SearchPropertiesClient({
   const [priceRange, setPriceRange] =
     React.useState("");
 
+  // MULTIPLE LOCATIONS
   const [location, setLocation] =
-    React.useState("");
+    React.useState<string[]>([]);
 
   const [propertyType, setPropertyType] =
     React.useState("");
@@ -54,8 +53,6 @@ export default function SearchPropertiesClient({
    * ==========================================
    * PROPERTY TYPE OPTIONS
    * ==========================================
-   *
-   * Property types depend on listing type.
    */
   const propertyTypeOptions = React.useMemo(() => {
     switch (listingType) {
@@ -77,8 +74,6 @@ export default function SearchPropertiesClient({
    * ==========================================
    * PRICE OPTIONS
    * ==========================================
-   *
-   * Price ranges depend on listing type.
    */
   const getPriceOptions = () => {
     switch (listingType) {
@@ -101,9 +96,11 @@ export default function SearchPropertiesClient({
    * LISTING TYPE CHANGE
    * ==========================================
    *
-   * When listing type changes:
-   * - Reset budget
-   * - Reset property type
+   * Reset:
+   * - Budget
+   * - Property Type
+   *
+   * Location is NOT reset.
    */
   const handleListingTypeChange = (
     value: string
@@ -124,8 +121,7 @@ export default function SearchPropertiesClient({
     e.preventDefault();
 
     /**
-     * Listing type is required because
-     * it determines the destination page.
+     * Listing type is required
      */
     if (!listingType) {
       return;
@@ -137,11 +133,15 @@ export default function SearchPropertiesClient({
      * ==========================================
      * LOCATION
      * ==========================================
+     *
+     * Multiple locations are converted to:
+     *
+     * location=Haad Rin,Thong Sala,Srithanu
      */
-    if (location) {
+    if (location.length > 0) {
       params.set(
         "location",
-        location
+        location.join(",")
       );
     }
 
@@ -190,10 +190,6 @@ export default function SearchPropertiesClient({
      * ==========================================
      * DESTINATION
      * ==========================================
-     *
-     * rent  -> /rent
-     * buy   -> /buy
-     * lease -> /lease
      */
     const queryString =
       params.toString();
@@ -211,7 +207,6 @@ export default function SearchPropertiesClient({
         onSubmit={handleSearch}
         className="grid grid-cols-1 gap-4 md:grid-cols-5"
       >
-
         {/* ========================================
             LISTING TYPE
         ========================================= */}
@@ -285,7 +280,8 @@ export default function SearchPropertiesClient({
             <SelectContent>
               {propertyTypeOptions.map(
                 (type) => {
-                  const Icon = type.icon;
+                  const Icon =
+                    type.icon;
 
                   return (
                     <SelectItem
@@ -350,7 +346,7 @@ export default function SearchPropertiesClient({
         </div>
 
         {/* ========================================
-            LOCATION
+            LOCATION - MULTI SELECT
         ========================================= */}
         <div>
           <label
@@ -362,32 +358,11 @@ export default function SearchPropertiesClient({
             Location
           </label>
 
-          <Select
-            value={location}
-            onValueChange={
-              setLocation
-            }
-          >
-            <SelectTrigger
-              id="location"
-              className="w-full"
-            >
-              <SelectValue placeholder="Select Location" />
-            </SelectTrigger>
-
-            <SelectContent>
-              {locations.map(
-                (locationName) => (
-                  <SelectItem
-                    key={locationName}
-                    value={locationName}
-                  >
-                    {locationName}
-                  </SelectItem>
-                )
-              )}
-            </SelectContent>
-          </Select>
+          <LocationListSelect
+            locationValue={location}
+            setLocationValue={setLocation}
+            maxW="w-[300px]"
+          />
         </div>
 
         {/* ========================================
@@ -404,9 +379,7 @@ export default function SearchPropertiesClient({
             Search
           </Button>
         </div>
-
       </form>
     </div>
   );
 }
-
