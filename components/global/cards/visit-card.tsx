@@ -184,7 +184,7 @@ function VisitCard({ property }: VisitCardProps) {
             IMAGE
         ========================================== */}
 
-    <div className="relative md:w-1/3 h-[200px] w-full shrink-0 md:h-auto md:w-64">
+    <div className="relative h-[200px] w-full shrink-0 md:h-auto md:w-64">
           <img
             src={imageUrl}
             alt={name || "Property"}
