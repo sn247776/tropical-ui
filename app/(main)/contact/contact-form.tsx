@@ -1,10 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import {
+  Controller,
+  useForm,
+} from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Loader2, Send, CheckCircle2 } from "lucide-react";
+import {
+  Loader2,
+  Send,
+  CheckCircle2,
+} from "lucide-react";
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,48 +25,84 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+
 import { submitContactAction } from "@/app/actions/contact";
+import CountryPhoneInput from "@/components/global/phone-input";
 
 const contactSchema = yup.object({
+  // Required
   name: yup
     .string()
     .trim()
     .required("Please enter your name")
-    .min(2, "Name must be at least 2 characters"),
+    .min(
+      2,
+      "Name must be at least 2 characters"
+    ),
 
+  // Optional
   email: yup
     .string()
     .trim()
-    .required("Please enter your email")
-    .email("Please enter a valid email"),
+    .email("Please enter a valid email")
+    .optional()
+    .transform((value) =>
+      value === "" ? undefined : value
+    ),
 
-  phone: yup.string().trim().optional(),
+  // Required
+  phone: yup
+    .string()
+    .trim()
+    .required("Please enter your phone number")
+    .min(
+      7,
+      "Please enter a valid phone number"
+    ),
 
+  // Optional
   enquiryType: yup
     .string()
-    .required("Please select an enquiry type"),
+    .optional()
+    .transform((value) =>
+      value === "" ? undefined : value
+    ),
 
+  // Required
   message: yup
     .string()
     .trim()
-    .required("Please tell us how we can help")
-    .min(10, "Please provide a little more information"),
+    .required(
+      "Please tell us how we can help"
+    )
+    .min(
+      10,
+      "Please provide a little more information"
+    ),
 });
 
-type ContactFormValues = yup.InferType<typeof contactSchema>;
+type ContactFormValues =
+  yup.InferType<typeof contactSchema>;
 
 export default function ContactForm() {
-  const [success, setSuccess] = useState(false);
-  const [serverError, setServerError] = useState("");
+  const [success, setSuccess] =
+    useState(false);
+
+  const [serverError, setServerError] =
+    useState("");
 
   const {
     register,
     handleSubmit,
-    setValue,
+    control,
     reset,
-    formState: { errors, isSubmitting },
+    formState: {
+      errors,
+      isSubmitting,
+    },
   } = useForm<ContactFormValues>({
     resolver: yupResolver(contactSchema),
+
     defaultValues: {
       name: "",
       email: "",
@@ -69,21 +112,37 @@ export default function ContactForm() {
     },
   });
 
-  const onSubmit = async (data: ContactFormValues) => {
+  const onSubmit = async (
+    data: ContactFormValues
+  ) => {
     setServerError("");
     setSuccess(false);
 
-    const response = await submitContactAction(data);
+    try {
+      const response =
+        await submitContactAction(data);
 
-    if (!response.success) {
-      setServerError(
-        response.message || "Something went wrong. Please try again."
+      if (!response.success) {
+        setServerError(
+          response.message ||
+            "Something went wrong. Please try again."
+        );
+
+        return;
+      }
+
+      setSuccess(true);
+      reset();
+    } catch (error) {
+      console.error(
+        "Contact form error:",
+        error
       );
-      return;
-    }
 
-    setSuccess(true);
-    reset();
+      setServerError(
+        "Something went wrong. Please try again."
+      );
+    }
   };
 
   return (
@@ -105,8 +164,9 @@ export default function ContactForm() {
             </p>
 
             <p className="mx-auto mt-1 max-w-md opacity-80">
-              Thank you for contacting Tropical Roots Realty. We&apos;ll get
-              back to you soon.
+              Thank you for contacting Tropical
+              Roots Realty. We&apos;ll get back to
+              you soon.
             </p>
           </div>
         </div>
@@ -121,6 +181,7 @@ export default function ContactForm() {
 
       {/* Name + Email */}
       <div className="grid gap-5 md:grid-cols-2">
+        {/* Name */}
         <FormField
           label="Your Name"
           required
@@ -134,9 +195,9 @@ export default function ContactForm() {
           />
         </FormField>
 
+        {/* Email */}
         <FormField
           label="Email Address"
-          required
           error={errors.email?.message}
         >
           <Input
@@ -151,70 +212,79 @@ export default function ContactForm() {
 
       {/* Phone + Enquiry Type */}
       <div className="grid gap-5 md:grid-cols-2">
+        {/* Phone */}
         <FormField
           label="Phone Number"
+          required
           error={errors.phone?.message}
         >
-          <Input
-            {...register("phone")}
-            type="tel"
-            placeholder="+66..."
-            disabled={isSubmitting}
-            className="h-12 rounded-xl text-center"
+          <Controller
+            name="phone"
+            control={control}
+            render={({ field }) => (
+              <CountryPhoneInput
+                value={field.value}
+                onChange={field.onChange}
+                disabled={isSubmitting}
+              />
+            )}
           />
         </FormField>
 
+        {/* Enquiry Type */}
         <FormField
           label="I am interested in"
-          required
           error={errors.enquiryType?.message}
         >
-          <Select
-            disabled={isSubmitting}
-            onValueChange={(value) =>
-              setValue("enquiryType", value, {
-                shouldValidate: true,
-              })
-            }
-          >
-            <SelectTrigger className="h-12 rounded-xl justify-center text-center">
-              <SelectValue placeholder="Select an option" />
-            </SelectTrigger>
+          <Controller
+            name="enquiryType"
+            control={control}
+            render={({ field }) => (
+              <Select
+                value={field.value || ""}
+                disabled={isSubmitting}
+                onValueChange={field.onChange}
+              >
+                <SelectTrigger className="h-12 rounded-xl justify-center text-center">
+                  <SelectValue placeholder="Select an option" />
+                </SelectTrigger>
 
-            <SelectContent>
-              <SelectItem value="buying">
-                Buying a property
-              </SelectItem>
+                <SelectContent>
+                  <SelectItem value="buying">
+                    Buying a property
+                  </SelectItem>
 
-              <SelectItem value="selling">
-                Selling my property
-              </SelectItem>
+                  <SelectItem value="selling">
+                    Selling my property
+                  </SelectItem>
 
-              <SelectItem value="renting">
-                Renting a property
-              </SelectItem>
+                  <SelectItem value="renting">
+                    Renting a property
+                  </SelectItem>
 
-              <SelectItem value="property-management">
-                Property management
-              </SelectItem>
+                  <SelectItem value="property-management">
+                    Property management
+                  </SelectItem>
 
-              <SelectItem value="maintenance">
-                Maintenance & repairs
-              </SelectItem>
+                  <SelectItem value="maintenance">
+                    Maintenance & repairs
+                  </SelectItem>
 
-              <SelectItem value="renovation">
-                Renovation & construction
-              </SelectItem>
+                  <SelectItem value="renovation">
+                    Renovation & construction
+                  </SelectItem>
 
-              <SelectItem value="investment">
-                Investment opportunities
-              </SelectItem>
+                  <SelectItem value="investment">
+                    Investment opportunities
+                  </SelectItem>
 
-              <SelectItem value="other">
-                Something else
-              </SelectItem>
-            </SelectContent>
-          </Select>
+                  <SelectItem value="other">
+                    Something else
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            )}
+          />
         </FormField>
       </div>
 
@@ -236,8 +306,8 @@ export default function ContactForm() {
       {/* Submit Area */}
       <div className="flex flex-col items-center gap-4 pt-2">
         <p className="max-w-md text-center text-xs leading-5 text-muted-foreground">
-          By submitting this form, you agree that we may contact you regarding
-          your enquiry.
+          By submitting this form, you agree that
+          we may contact you regarding your enquiry.
         </p>
 
         <Button
@@ -277,8 +347,11 @@ function FormField({
     <div className="space-y-2 text-center">
       <label className="block text-sm font-medium text-foreground">
         {label}
+
         {required && (
-          <span className="ml-1 text-destructive">*</span>
+          <span className="ml-1 text-destructive">
+            *
+          </span>
         )}
       </label>
 

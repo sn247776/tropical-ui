@@ -4,9 +4,9 @@ import { submitContactApi } from "@/app/api/contact";
 
 export async function submitContactAction(data: {
   name: string;
-  email: string;
-  phone?: string;
-  enquiryType: string;
+  email?: string;
+  phone: string;
+  enquiryType?: string;
   message: string;
 }) {
   try {

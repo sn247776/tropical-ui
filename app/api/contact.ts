@@ -2,9 +2,9 @@ import { baseURL } from "./api";
 
 export interface ContactData {
   name: string;
-  email: string;
-  phone?: string;
-  enquiryType: string;
+  email?: string;
+  phone: string;
+  enquiryType?: string;
   message: string;
 }
 
