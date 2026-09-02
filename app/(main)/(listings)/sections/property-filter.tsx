@@ -498,6 +498,7 @@ const PropertyFilter = ({
           <div className="mt-1">
             <LocationListSelect
               locationValue={filters.location}
+               multiSelect={true}
               setLocationValue={(value) =>
                 handleFilterChange(
                   "location",

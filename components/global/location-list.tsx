@@ -1,4 +1,3 @@
-
 "use client";
 
 import * as React from "react";
@@ -29,14 +28,28 @@ interface LocationListSelectProps {
   setLocationValue: (value: string[]) => void;
 
   maxW?: string;
+
+  /**
+   * Allows the trigger to be styled like the other form inputs.
+   */
+  className?: string;
+
+  /**
+   * true  = multiple locations can be selected
+   * false = only one location can be selected
+   */
+  multiSelect?: boolean;
 }
 
 export function LocationListSelect({
   locationValue,
   setLocationValue,
   maxW = "w-full",
+  className,
+  multiSelect = true,
 }: LocationListSelectProps) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] =
+    React.useState(false);
 
   const [locations, setLocations] =
     React.useState<string[]>([]);
@@ -44,11 +57,6 @@ export function LocationListSelect({
   const [loading, setLoading] =
     React.useState(true);
 
-  /**
-   * ==========================================
-   * FETCH LOCATIONS
-   * ==========================================
-   */
   React.useEffect(() => {
     let mounted = true;
 
@@ -56,12 +64,15 @@ export function LocationListSelect({
       try {
         setLoading(true);
 
-        const response = await getLocationsAction();
+        const response =
+          await getLocationsAction();
 
         if (!mounted) return;
 
         if (response.success) {
-          setLocations(response.data ?? []);
+          setLocations(
+            response.data ?? []
+          );
         } else {
           setLocations([]);
 
@@ -93,14 +104,26 @@ export function LocationListSelect({
     };
   }, []);
 
-  /**
-   * ==========================================
-   * SELECT / UNSELECT LOCATION
-   * ==========================================
-   */
   const handleLocationSelect = (
     location: string
   ) => {
+    /*
+     * SINGLE SELECT
+     *
+     * Replace the current value and
+     * automatically close the dropdown.
+     */
+    if (!multiSelect) {
+      setLocationValue([location]);
+      setOpen(false);
+      return;
+    }
+
+    /*
+     * MULTI SELECT
+     *
+     * Keep the existing toggle behavior.
+     */
     const alreadySelected =
       locationValue.includes(location);
 
@@ -120,11 +143,6 @@ export function LocationListSelect({
     ]);
   };
 
-  /**
-   * ==========================================
-   * DISPLAY VALUE
-   * ==========================================
-   */
   const displayValue = () => {
     if (locationValue.length === 0) {
       return "Select location...";
@@ -157,9 +175,12 @@ export function LocationListSelect({
           role="combobox"
           aria-expanded={open}
           disabled={loading}
-          className="w-full justify-between"
+          className={cn(
+            "w-full justify-between",
+            className
+          )}
         >
-          <span className="truncate text-left">
+          <span className="min-w-0 flex-1 truncate text-left">
             {loading
               ? "Loading locations..."
               : displayValue()}
@@ -188,37 +209,39 @@ export function LocationListSelect({
             </CommandEmpty>
 
             <CommandGroup>
-              {locations.map((location) => {
-                const selected =
-                  locationValue.includes(
-                    location
+              {locations.map(
+                (location) => {
+                  const selected =
+                    locationValue.includes(
+                      location
+                    );
+
+                  return (
+                    <CommandItem
+                      key={location}
+                      value={location}
+                      onSelect={() =>
+                        handleLocationSelect(
+                          location
+                        )
+                      }
+                    >
+                      <span className="truncate">
+                        {location}
+                      </span>
+
+                      <Check
+                        className={cn(
+                          "ml-auto h-4 w-4",
+                          selected
+                            ? "opacity-100"
+                            : "opacity-0"
+                        )}
+                      />
+                    </CommandItem>
                   );
-
-                return (
-                  <CommandItem
-                    key={location}
-                    value={location}
-                    onSelect={() =>
-                      handleLocationSelect(
-                        location
-                      )
-                    }
-                  >
-                    <span className="truncate">
-                      {location}
-                    </span>
-
-                    <Check
-                      className={cn(
-                        "ml-auto h-4 w-4",
-                        selected
-                          ? "opacity-100"
-                          : "opacity-0"
-                      )}
-                    />
-                  </CommandItem>
-                );
-              })}
+                }
+              )}
             </CommandGroup>
           </CommandList>
         </Command>
@@ -226,4 +249,3 @@ export function LocationListSelect({
     </Popover>
   );
 }
-

@@ -362,6 +362,7 @@ export default function SearchPropertiesClient({
             locationValue={location}
             setLocationValue={setLocation}
             maxW="w-[300px]"
+             multiSelect={true}
           />
         </div>
 
